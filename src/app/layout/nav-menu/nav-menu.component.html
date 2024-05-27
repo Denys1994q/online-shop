@@ -1,0 +1,9 @@
+<nav>
+  <ul class="flex gap-6 text-green-600">
+    @for (item of items; track $index) {
+    <li>
+      <a href="{{ item.to }}">{{ item.label }}</a>
+    </li>
+    }
+  </ul>
+</nav>
