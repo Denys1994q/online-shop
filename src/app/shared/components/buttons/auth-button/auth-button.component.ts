@@ -3,9 +3,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 
 @Component({
-  selector: 'app-auth-btn',
+  selector: 'app-auth-button',
   standalone: true,
   imports: [MatIconModule, MatButtonModule],
-  templateUrl: './auth-btn.component.html'
+  templateUrl: './auth-button.component.html'
 })
-export class AuthBtnComponent {}
+export class AuthButtonComponent {}

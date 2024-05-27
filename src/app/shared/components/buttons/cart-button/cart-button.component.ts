@@ -3,9 +3,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 
 @Component({
-  selector: 'app-cart-btn',
+  selector: 'app-cart-button',
   standalone: true,
   imports: [MatIconModule, MatButtonModule],
-  templateUrl: './cart-btn.component.html'
+  templateUrl: './cart-button.component.html'
 })
-export class CartBtnComponent {}
+export class CartButtonComponent {}
