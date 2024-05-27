@@ -1,0 +1,4 @@
+<span class="text-2xl font-medium block">{{ priceAfterDiscount | currency : 'USD' : true : '1.2-2' }}</span>
+@if (priceWithoutDiscount) {
+<span class="text-sm line-through block">{{ priceWithoutDiscount | currency : 'USD' : true : '1.2-2' }}</span>
+}
