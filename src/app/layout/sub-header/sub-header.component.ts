@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AuthBtnComponent} from '../../btns/auth-btn/auth-btn.component';
-import {CartBtnComponent} from '../../btns/cart-btn/cart-btn.component';
-import {SelectComponent} from '../../inputs/select/select.component';
+import {AuthBtnComponent} from '../../shared/components/buttons/auth-btn/auth-btn.component';
+import {CartBtnComponent} from '../../shared/components/buttons/cart-btn/cart-btn.component';
+import {SelectComponent} from '../../shared/components/inputs/select/select.component';
 
 @Component({
   selector: 'app-sub-header',

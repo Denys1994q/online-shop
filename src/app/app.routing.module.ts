@@ -5,7 +5,7 @@ import {RoutingConstants} from './shared/constants/rouring.constant';
 const routes: Routes = [
   {
     path: 'products',
-    loadChildren: () => import('./shared/routes/products.routes').then((m) => m.ProductsRoutes)
+    loadChildren: () => import('./pages/products/products.module').then((m) => m.ProductsModule)
   },
   {path: '**', redirectTo: RoutingConstants.PRODUCTS}
 ];

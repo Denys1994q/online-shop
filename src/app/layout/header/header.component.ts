@@ -13,6 +13,5 @@ export class HeaderComponent {
     {label: 'Blog', to: '#'},
     {label: 'About Us', to: '#'},
     {label: 'Careers', to: '#'}
-  ]
-
+  ];
 }
