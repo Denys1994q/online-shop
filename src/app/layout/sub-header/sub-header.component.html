@@ -1,0 +1,16 @@
+<div class="subHeader p-5 border-t border-gray-100 bg-gray-50">
+  <div class="flex items-center justify-between mb-4">
+    <a href="">
+      <img src="/assets/logo.svg" alt="logo" />
+    </a>
+    <div class="flex items-center gap-5">
+      <app-auth-btn></app-auth-btn>
+      <app-cart-btn></app-cart-btn>
+    </div>
+  </div>
+  <ul class="flex gap-8">
+    <li *ngFor="let select of categories">
+      <app-select [options]="select.options" [label]="select.label"></app-select>
+    </li>
+  </ul>
+</div>
