@@ -7,7 +7,7 @@ import {ProductInterface} from '../../models/product.interface';
   styleUrls: ['./product-card.component.sass']
 })
 export class ProductCardComponent implements OnInit {
-  @Input() product!: ProductInterface;
+  @Input({required: true}) product!: ProductInterface;
   priceWithDiscount!: number;
 
   ngOnInit() {

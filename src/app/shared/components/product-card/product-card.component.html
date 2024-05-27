@@ -23,10 +23,10 @@
     </mat-card-content>
   </mat-card-header>
   <mat-card-actions>
-    <app-price
-      [priceAfterDiscount]="priceWithDiscount"
-      [priceWithoutDiscount]="product.discount ? product.price : 0"
-    ></app-price>
+    <span class="text-2xl font-medium block">{{ priceWithDiscount | currency : 'USD' : true : '1.2-2' }}</span>
+    @if (product.discount) {
+    <span class="text-sm line-through block">{{ product.price | currency : 'USD' : true : '1.2-2' }}</span>
+    }
     <app-primary-button class="m-4" [text]="'Product Detail'"></app-primary-button>
     <app-wishlist-button></app-wishlist-button>
   </mat-card-actions>
