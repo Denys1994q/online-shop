@@ -8,4 +8,5 @@ export interface ProductInterface {
   state: string;
   price: number;
   discount?: number;
+  rating: number;
 }

@@ -4,10 +4,22 @@ import {ProductCardComponent} from './components/product-card/product-card.compo
 import {MatCardModule} from '@angular/material/card';
 import {PrimaryButtonComponent} from './components/buttons/primary-button/primary-button.component';
 import {WishlistButtonComponent} from './components/buttons/wishlist-button/wishlist-button.component';
+import {FiltersComponent} from './components/forms/filters/filters.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatIconButton} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
-  declarations: [ProductCardComponent],
-  imports: [CommonModule, MatCardModule, PrimaryButtonComponent, WishlistButtonComponent],
-  exports: [ProductCardComponent]
+  declarations: [ProductCardComponent, FiltersComponent],
+  imports: [
+    MatIconButton,
+    MatIconModule,
+    CommonModule,
+    MatCardModule,
+    PrimaryButtonComponent,
+    WishlistButtonComponent,
+    ReactiveFormsModule
+  ],
+  exports: [ProductCardComponent, FiltersComponent]
 })
 export class SharedModule {}

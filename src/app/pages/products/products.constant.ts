@@ -12,6 +12,7 @@ export const products: ProductInterface[] = [
     seller: 'Rozetka',
     state: 'New',
     price: 102,
+    rating: 3,
     discount: 10
   },
   {
@@ -24,7 +25,8 @@ export const products: ProductInterface[] = [
     country: 'USA',
     seller: 'Rozetka',
     state: 'New',
-    price: 55
+    price: 55,
+    rating: 4
   },
   {
     id: '3',
@@ -37,6 +39,7 @@ export const products: ProductInterface[] = [
     seller: 'Rozetka',
     state: 'New',
     price: 200,
+    rating: 1,
     discount: 20
   }
 ];
