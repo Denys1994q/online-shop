@@ -6,7 +6,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class InternationalDatePipe implements PipeTransform {
   transform(value: Date, locale: string = 'en-US'): string {
-    const options: any = {year: 'numeric', month: 'long', day: 'numeric'};
+    const options: Intl.DateTimeFormatOptions = {year: 'numeric', month: 'long', day: 'numeric'};
     return new Intl.DateTimeFormat(locale, options).format(value);
   }
 }
