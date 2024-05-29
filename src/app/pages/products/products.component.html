@@ -1,4 +1,63 @@
 <h1>Products Page</h1>
+<div class="w-2/4 bg-gray-200 p-5 flex flex-col items-center justify-center">
+  <button appScale class="m-0-auto bg-red-200 p-2 mb-2">Hover on me</button>
+  <h3>User permissions: {{ user.permissions | json }}</h3>
+  <ul>
+    <li>
+      <p *appPermissionCheck="PermissionEnum.Write">
+        1. Text for user with <span class="text-red-500 font-bold">write</span> permission
+      </p>
+    </li>
+    <li>
+      <p *appPermissionCheck="PermissionEnum.Read">
+        2. Text for user with <span class="text-red-500 font-bold">read</span> permission
+      </p>
+    </li>
+    <li>
+      <p *appPermissionCheck="PermissionEnum.Delete">
+        3. Text for user with <span class="text-red-500 font-bold">delete</span> permission
+      </p>
+    </li>
+  </ul>
+  <div>
+    <h2>Pipe: convert number to the country format</h2>
+    <ul class="flex justify-around">
+      <li>
+        US
+        <p class="font-bold">{{ 1234.56 | countryNumberFormat : 'US' }}</p>
+      </li>
+      <li>
+        UK
+        <p class="font-bold">{{ 1234.56 | countryNumberFormat : 'UK' }}</p>
+      </li>
+      <li>
+        DE
+        <p class="font-bold">{{ 1234.56 | countryNumberFormat : 'DE' }}</p>
+      </li>
+      <li>
+        FR
+        <p class="font-bold">{{ 1234.56 | countryNumberFormat : 'FR' }}</p>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h2>Pipe: convert date to international variant</h2>
+    <ul class="flex justify-around flex-wrap">
+      <li>
+        USA
+        <p class="font-bold">{{ currentData | internationalDate : 'en-US' }}</p>
+      </li>
+      <li>
+        France
+        <p class="font-bold">{{ currentData | internationalDate : 'fr-FR' }}</p>
+      </li>
+      <li>
+        China
+        <p class="font-bold">{{ currentData | internationalDate : 'zh-CN' }}</p>
+      </li>
+    </ul>
+  </div>
+</div>
 <div class="my-8 w-8/12">
   @if (loading) {
   <div class="flex justify-center"><mat-spinner diameter="30"></mat-spinner></div>
