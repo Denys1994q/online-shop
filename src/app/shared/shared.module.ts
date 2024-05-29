@@ -6,20 +6,24 @@ import {PrimaryButtonComponent} from './components/buttons/primary-button/primar
 import {WishlistButtonComponent} from './components/buttons/wishlist-button/wishlist-button.component';
 import {FiltersComponent} from './components/forms/filters/filters.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatIconButton} from '@angular/material/button';
+import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {DynamicFormFieldComponent} from './components/forms/filters/dynamic-form-field/dynamic-form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [ProductCardComponent, FiltersComponent],
   imports: [
-    MatIconButton,
+    MatButtonModule,
     MatIconModule,
     CommonModule,
     MatCardModule,
     PrimaryButtonComponent,
     WishlistButtonComponent,
-    ReactiveFormsModule
+    DynamicFormFieldComponent,
+    ReactiveFormsModule,
+    MatCheckboxModule
   ],
-  exports: [ProductCardComponent, FiltersComponent]
+  exports: [ProductCardComponent, FiltersComponent, MatCheckboxModule]
 })
 export class SharedModule {}

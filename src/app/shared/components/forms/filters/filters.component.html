@@ -1,15 +1,8 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>username</label>
-    <input
-      [class.bg-red-500]="
-        registerForm.get('username')?.invalid &&
-        (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)
-      "
-      class="bg-red-200"
-      type="text"
-      formControlName="username"
-    />
-  </div>
-  <button type="submit">Submit</button>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <ng-container *ngFor="let formItem of formFields">
+    <dynamic-form-field [formItem]="formItem"></dynamic-form-field>
+  </ng-container>
+  <section>
+    <button type="submit" mat-raised-button color="accent" [disabled]="!myForm.valid" class="w-full">Submit</button>
+  </section>
 </form>

@@ -1,33 +1,43 @@
 <mat-card>
-  <img mat-card-image class="w-72" src="{{ product.image }}" alt="Product image" />
+  <div class="w-96 h-64">
+    <img mat-card-image class="w-96 h-64 object-contain p-5" src="{{ product.image }}" alt="Product image" />
+  </div>
   <mat-card-header>
-    <mat-card-title>{{ product.title }}</mat-card-title>
-    <mat-card-subtitle>
-      <p class="truncate w-64">{{ product.description }}</p>
-    </mat-card-subtitle>
-    <ul class="flex">
-      @for (item of [].constructor(product.rating); track $index) {
-      <li>
-        <button mat-icon-button><mat-icon>star</mat-icon></button>
-      </li>
-      }
-    </ul>
-    <mat-card-content>
-      <ul>
-        <li class="flex">
-          <p class="w-3/5">Country:</p>
-          <p>{{ product.country }}</p>
+    <div>
+      <mat-card-title>{{ product.title }}</mat-card-title>
+      <mat-card-subtitle>
+        <p class="truncate w-72">{{ product.description }}</p>
+      </mat-card-subtitle>
+      <ul class="flex">
+        @for (item of [].constructor(product.rating); track $index) {
+        <li>
+          <mat-icon>star</mat-icon>
         </li>
-        <li class="flex">
-          <p class="w-3/5">State:</p>
-          <p>{{ product.state }}</p>
-        </li>
-        <li class="flex">
-          <p class="w-3/5">Seller:</p>
-          <p>{{ product.seller }}</p>
-        </li>
+        }
       </ul>
-    </mat-card-content>
+    </div>
+    <div class="mt-auto">
+      <mat-card-content>
+        <ul>
+          <li class="flex">
+            <p class="w-2/5">Country:</p>
+            <p>{{ product.country }}</p>
+          </li>
+          <li class="flex">
+            <p class="w-2/5">State:</p>
+            <p>{{ product.state }}</p>
+          </li>
+          <li class="flex">
+            <p class="w-2/5">Seller:</p>
+            <p>{{ product.seller }}</p>
+          </li>
+          <li class="flex">
+            <p class="w-2/5">Brand:</p>
+            <p>{{ product.brand }}</p>
+          </li>
+        </ul>
+      </mat-card-content>
+    </div>
   </mat-card-header>
   <mat-card-actions>
     <div>

@@ -1,0 +1,44 @@
+<div class="dynamic-form-field-container">
+  <ng-container [formGroup]="form">
+    <ng-container [ngSwitch]="formItem.type">
+      <mat-form-field *ngSwitchCase="'text'" class="w-full">
+        <mat-label>{{ formItem.label }}</mat-label>
+        <input matInput type="text" class="form-control" formControlName="{{ formItem.id }}" />
+        <mat-error *ngIf="form.get(formItem.id)!.dirty && form.get(formItem.id)!.hasError('required')"
+          >{{ formItem.label }} is required</mat-error
+        >
+        <mat-error *ngIf="form.get(formItem.id)!.dirty && form.get(formItem.id)!.hasError('email')"
+          >{{ formItem.label }} is not valid</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field *ngSwitchCase="'select'" class="w-full">
+        <mat-label>{{ formItem.label }}</mat-label>
+        <mat-select formControlName="{{ formItem.id }}" multiple>
+          <mat-select-trigger>
+            {{ form.get(formItem.id)?.value[0]?.label || '' }}
+            <span *ngIf="((form.get(formItem.id)?.value)!.length || 0) > 1">
+              (+{{ (form.get(formItem.id)?.value?.length || 0) - 1 }}
+              {{ form.get(formItem.id)?.value?.length === 2 ? 'other' : 'others' }})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let menuOption of formItem.selectMenuOptions" [value]="menuOption">{{
+            menuOption.label
+          }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get(formItem.id)!.dirty && form.get(formItem.id)!.hasError('required')"
+          >{{ formItem.label }} is required</mat-error
+        >
+      </mat-form-field>
+      <div *ngSwitchCase="'checkbox'" class="example-section" formGroupName="brands">
+        <h4>{{ formItem.label }}:</h4>
+        <ul>
+          <li *ngFor="let item of formItem.checkboxOptions">
+            <p>
+              <mat-checkbox formControlName="{{ item.value }}">{{ item.label }}</mat-checkbox>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
