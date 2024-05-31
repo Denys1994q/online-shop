@@ -1,8 +1,10 @@
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="filtersForm">
   <ng-container *ngFor="let formItem of formFields">
     <dynamic-form-field [formItem]="formItem"></dynamic-form-field>
   </ng-container>
-  <section>
-    <button type="submit" mat-raised-button color="accent" [disabled]="!myForm.valid" class="w-full">Submit</button>
-  </section>
+  <div class="text-center">
+    <button mat-button [disabled]="filtersForm.pristine && filtersForm.valid" (click)="resetForm()">Reset</button>
+  </div>
 </form>
+
+
