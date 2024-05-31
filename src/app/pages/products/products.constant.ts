@@ -10,10 +10,10 @@ export const products: ProductInterface[] = [
     country: 'USA',
     seller: 'Rozetka',
     state: 'New',
-    price: 102,
-    rating: 3,
+    price: 1200,
     discount: 10,
-    brand: 'Apple'
+    brand: 'Apple',
+    rating: 5
   },
   {
     id: '2',

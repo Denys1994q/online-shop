@@ -11,6 +11,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {DynamicFormFieldComponent} from './components/forms/dynamic-form-field/dynamic-form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
+import {ScaleDirective} from './directives/scale.directive';
+import {PermissionCheckDirective} from './directives/permissionCheck.directive';
+import {CountryNumberFormatPipe} from './pipes/countryNumberFormat.pipe';
+import {InternationalDatePipe} from './pipes/internationalDate.pipe';
 
 @NgModule({
   declarations: [ProductCardComponent, FiltersComponent],
@@ -24,7 +28,11 @@ import {MatSliderModule} from '@angular/material/slider';
     DynamicFormFieldComponent,
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatSliderModule
+    MatSliderModule,
+    ScaleDirective,
+    PermissionCheckDirective,
+    CountryNumberFormatPipe,
+    InternationalDatePipe
   ],
   exports: [ProductCardComponent, FiltersComponent, MatCheckboxModule, MatSliderModule]
 })
