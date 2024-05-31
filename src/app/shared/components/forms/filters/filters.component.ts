@@ -27,7 +27,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
     });
   }
 
-  setupFormFields() {
+  setupFormFields(): void {
     this.formFields.forEach((formItem: DynamicFormFieldInterface) => {
       let formControl;
       if (formItem.type === FormFieldTypeEnum.Checkbox && formItem.options) {
@@ -38,7 +38,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
         formControl = checkboxFormGroup;
       } else if (formItem.type === FormFieldTypeEnum.Slider && formItem.options) {
         const formGroup = this.fb.group({});
-        formItem.options.forEach((option: any) => {
+        formItem.options.forEach((option: OptionInterface) => {
           formGroup.addControl(option.label, this.fb.control(option.value));
         });
         formControl = formGroup;

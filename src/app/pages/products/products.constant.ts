@@ -12,7 +12,7 @@ export const products: ProductInterface[] = [
     state: 'New',
     price: 1200,
     discount: 10,
-    brand: 'Apple',
+    brand: 5,
     rating: 5
   },
   {
@@ -26,7 +26,7 @@ export const products: ProductInterface[] = [
     state: 'New',
     price: 55,
     rating: 4,
-    brand: 'Samsung'
+    brand: 6
   },
   {
     id: '3',
@@ -40,6 +40,6 @@ export const products: ProductInterface[] = [
     price: 200,
     rating: 1,
     discount: 20,
-    brand: 'Motorola'
+    brand: 8
   }
 ];

@@ -9,5 +9,5 @@ export interface ProductInterface {
   price: number;
   discount?: number;
   rating: number;
-  brand: string;
+  brand: number;
 }
