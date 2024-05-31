@@ -11,7 +11,7 @@ export const products: ProductInterface[] = [
     country: 'USA',
     seller: 'Rozetka',
     state: 'New',
-    price: 102,
+    price: 1200,
     discount: 10
   },
   {
