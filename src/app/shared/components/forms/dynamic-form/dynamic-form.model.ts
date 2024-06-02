@@ -12,13 +12,25 @@ export interface OptionInterface {
   value: number | string;
 }
 
-export interface DynamicFormFieldInterface {
+export interface ValidationInterface {
+  error: ValidatorFn;
+  type: string;
+  message: string;
+}
+
+export interface FieldInterface {
   id: string;
   label: string;
   type: FormFieldTypeEnum;
   options?: OptionInterface[];
   value?: string | OptionInterface[] | number[];
-  validators?: ValidatorFn[];
+  validators?: ValidationInterface[];
   min?: number;
   max?: number;
+}
+
+export interface DynamicFormInterface {
+  mode: 'onChange' | 'onSubmit';
+  resetBtn?: boolean;
+  fields: FieldInterface[];
 }

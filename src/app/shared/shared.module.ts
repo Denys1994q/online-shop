@@ -4,20 +4,33 @@ import {ProductCardComponent} from './components/product-card/product-card.compo
 import {MatCardModule} from '@angular/material/card';
 import {PrimaryButtonComponent} from './components/buttons/primary-button/primary-button.component';
 import {WishlistButtonComponent} from './components/buttons/wishlist-button/wishlist-button.component';
-import {FiltersComponent} from './components/forms/filters/filters.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {DynamicFormComponent} from './components/forms/dynamic-form/dynamic-form.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {DynamicFormFieldComponent} from './components/forms/dynamic-form-field/dynamic-form-field';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatSliderModule} from '@angular/material/slider';
 import {ScaleDirective} from './directives/scale.directive';
 import {PermissionCheckDirective} from './directives/permissionCheck.directive';
 import {CountryNumberFormatPipe} from './pipes/countryNumberFormat.pipe';
 import {InternationalDatePipe} from './pipes/internationalDate.pipe';
+import {TextInputComponent} from './components/inputs/text-input/text-input.component';
+import {DynamicErrorComponent} from './components/forms/dynamic-error/dynamic-error.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSliderModule} from '@angular/material/slider';
+import {SliderComponent} from './components/inputs/slider/slider.component';
 
 @NgModule({
-  declarations: [ProductCardComponent, FiltersComponent],
+  declarations: [
+    ProductCardComponent,
+    DynamicFormComponent,
+    TextInputComponent,
+    DynamicFormFieldComponent,
+    DynamicErrorComponent,
+    SliderComponent
+  ],
   imports: [
     MatButtonModule,
     MatIconModule,
@@ -25,15 +38,17 @@ import {InternationalDatePipe} from './pipes/internationalDate.pipe';
     MatCardModule,
     PrimaryButtonComponent,
     WishlistButtonComponent,
-    DynamicFormFieldComponent,
     ReactiveFormsModule,
     MatCheckboxModule,
     MatSliderModule,
     ScaleDirective,
     PermissionCheckDirective,
     CountryNumberFormatPipe,
-    InternationalDatePipe
+    InternationalDatePipe,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
-  exports: [ProductCardComponent, FiltersComponent, MatCheckboxModule, MatSliderModule]
+  exports: [ProductCardComponent, DynamicFormComponent, MatCheckboxModule, MatSliderModule]
 })
 export class SharedModule {}

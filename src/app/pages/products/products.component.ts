@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  onFilterChange(filters: any): void {
-    console.log('Filters changed:', filters);
+  onFormChange(values: any): void {
+    console.log('Form values changed:', values);
   }
 }

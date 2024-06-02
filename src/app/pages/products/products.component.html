@@ -3,7 +3,7 @@
 </div>
 <div class="flex justify-between">
   <div class="w-1/4">
-    <app-filters [formFields]="productsFilters" (filterChange)="onFilterChange($event)"></app-filters>
+    <app-dynamic-form [formConfig]="productsFilters" (formChange)="onFormChange($event)"></app-dynamic-form>
   </div>
   <div class="w-2/3">
     <div>
