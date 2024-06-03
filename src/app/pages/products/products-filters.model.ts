@@ -24,7 +24,22 @@ export enum BrandsEnum {
   INDESIT = 15,
   CORRADO = 16,
   BRAIN = 17,
-  FORMULA = 18
+  FORMULA = 18,
+  ACER = 19,
+  HP = 20
+}
+
+export enum StateEnum {
+  NEW = 1,
+  PRE_OWNED = 2
+}
+
+export enum SellerEnum {
+  ROZETKA = 1,
+  ALLO = 2,
+  FOXTROT = 3,
+  MOYO = 4,
+  PROM = 5
 }
 
 const enumLabelResolver = {

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProductInterface} from '../../models/product.interface';
+import {BrandsEnum} from '../../../pages/products/products-filters.model';
 
 @Component({
   selector: 'app-product-card',
