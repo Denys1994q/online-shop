@@ -10,7 +10,7 @@ import {baseUrl, getAllProductsUrl} from '../api/urls';
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<any> {
-    return this.http.get(`${baseUrl}/${getAllProductsUrl}`);
+  getProducts(): Observable<ProductInterface[]> {
+    return this.http.get<ProductInterface[]>(`${baseUrl}/${getAllProductsUrl}`);
   }
 }
