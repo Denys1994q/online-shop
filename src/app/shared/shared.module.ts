@@ -21,6 +21,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import {SliderComponent} from './components/inputs/slider/slider.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {SliderComponent} from './components/inputs/slider/slider.component';
     InternationalDatePipe,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   exports: [ProductCardComponent, DynamicFormComponent, MatCheckboxModule, MatSliderModule]
 })

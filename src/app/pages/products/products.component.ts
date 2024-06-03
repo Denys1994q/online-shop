@@ -16,15 +16,19 @@ export class ProductsComponent implements OnInit {
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.subscribeToProducts();
+    this.getProducts();
   }
 
-  subscribeToProducts(): void {
+  getProducts(): void {
     this.loading = true;
     this.productsService.getProducts().subscribe({
       next: (products: ProductInterface[]) => {
         this.products = products;
         this.loading = false;
+      },
+      error: (error) => {
+        this.loading = false;
+        console.log(error);
       }
     });
   }
