@@ -1,5 +1,18 @@
 import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
-import {user, PermissionEnum} from '../../user';
+
+export enum PermissionEnum {
+  Read = 'read',
+  Write = 'write',
+  Delete = 'delete'
+}
+
+export interface UserInterface {
+  permissions: PermissionEnum[];
+}
+
+const user = {
+  permissions: [PermissionEnum.Read, PermissionEnum.Write]
+};
 
 @Directive({
   selector: '[appPermissionCheck]',

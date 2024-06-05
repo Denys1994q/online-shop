@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductsService} from '../../services/products.service';
 import {ProductInterface} from '../../shared/models/product.interface';
-import {user} from '../../user';
-import {UserInterface, PermissionEnum} from '../../user';
+import {productsFilters} from './constants/products-filters.constant';
 
 @Component({
   selector: 'app-products',
@@ -10,12 +9,11 @@ import {UserInterface, PermissionEnum} from '../../user';
   styleUrls: []
 })
 export class ProductsComponent implements OnInit {
-  PermissionEnum = PermissionEnum;
-  constructor(private productsService: ProductsService) {}
   products!: ProductInterface[];
   loading: boolean = false;
-  user: UserInterface = user;
-  currentData = new Date();
+  productsFilters = productsFilters;
+
+  constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
     this.subscribeToProducts();
@@ -29,5 +27,9 @@ export class ProductsComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  onFormChange(values: any): void {
+    console.log('Form values changed:', values);
   }
 }
