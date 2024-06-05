@@ -77,8 +77,8 @@ export class DynamicFormService {
   transformCheckboxesArray(dynamicForm: FormGroup, checkboxFieldId: string, options: OptionInterface[]): string[] {
     const checkboxValues = dynamicForm.value[checkboxFieldId];
     const selectedOptions = checkboxValues
-      .map((isChecked: boolean, index: number) => (isChecked ? options[index].label : null))
-      .filter((label: string | null) => label !== null);
+      .map((isChecked: boolean, index: number) => (isChecked ? options[index].value : null))
+      .filter((value: string | null) => value !== null);
 
     return selectedOptions;
   }
