@@ -36,7 +36,6 @@ export const productsFilters: DynamicFormInterface = {
         {label: '1', value: 1}
       ]
     },
-    // ⭐
     {
       id: 'price',
       label: 'Price',
