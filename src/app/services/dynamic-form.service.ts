@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {
   DynamicFormInterface,
   FieldInterface,
@@ -83,9 +83,9 @@ export class DynamicFormService {
     return selectedOptions;
   }
 
-  removeEmptyCheckboxFields(formValuesModified: any): Object {
+  removeEmptyCheckboxFields(formValuesModified: Record<string, any>): Record<string, any> {
     return Object.fromEntries(
-      Object.entries(formValuesModified).filter(([key, value]) => {
+      Object.entries(formValuesModified).filter(([_, value]) => {
         return Array.isArray(value) ? value.length > 0 : value;
       })
     );
