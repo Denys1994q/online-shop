@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {
   DynamicFormInterface,
   FieldInterface,
@@ -13,25 +13,33 @@ import {
 export class DynamicFormService {
   constructor(private fb: FormBuilder) {}
 
-  setupFormFields(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
-    formConfig.fields.forEach((formItem: FieldInterface) => {
-      let formControl;
-      if (formItem.type === FormFieldTypeEnum.Checkbox && formItem.options) {
-        const checkboxFormGroup = this.fb.group({});
-        formItem.options.forEach((option: OptionInterface) => {
-          checkboxFormGroup.addControl(option.value as string, this.fb.control(false));
-        });
-        formControl = checkboxFormGroup;
-      } else if (formItem.type === FormFieldTypeEnum.Slider && formItem.options) {
-        const formGroup = this.fb.group({});
+  private FormControlResolver: any = {
+    [FormFieldTypeEnum.Checkbox]: (formItem: FieldInterface) => {
+      return formItem.options && this.fb.array(formItem.options.map(() => new FormControl(false)));
+    },
+    [FormFieldTypeEnum.Slider]: (formItem: FieldInterface) => {
+      const formGroup = this.fb.group({});
+      formItem.options &&
         formItem.options.forEach((option: OptionInterface) => {
           formGroup.addControl(option.label, this.fb.control(option.value));
         });
-        formControl = formGroup;
-      } else {
-        const validationErrors = formItem.validators && formItem.validators.map((validator) => validator.error);
-        formControl = this.fb.control(formItem.value || '', validationErrors);
-      }
+      return formGroup;
+    },
+    default: (formItem: FieldInterface) => {
+      const validationErrors = formItem.validators && formItem.validators.map((validator) => validator.error);
+      return this.fb.control(formItem.value || '', validationErrors);
+    }
+  };
+
+  resolveFormControl(formItem: FieldInterface): AbstractControl {
+    return this.FormControlResolver[formItem.type]
+      ? this.FormControlResolver[formItem.type](formItem)
+      : this.FormControlResolver.default(formItem);
+  }
+
+  setupFormFields(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
+    formConfig.fields.forEach((formItem: FieldInterface) => {
+      const formControl = this.resolveFormControl(formItem);
       dynamicForm.addControl(formItem.id, formControl);
     });
   }
@@ -41,7 +49,7 @@ export class DynamicFormService {
     this.resetValuesForSliderType(dynamicForm, formConfig);
   }
 
-  private resetValuesForSliderType(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
+  resetValuesForSliderType(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
     formConfig.fields.forEach((formItem: FieldInterface) => {
       if (formItem.type === FormFieldTypeEnum.Slider) {
         const id = formItem.id;
@@ -53,5 +61,33 @@ export class DynamicFormService {
         });
       }
     });
+  }
+
+  getModifiedCheckboxValues(dynamicForm: FormGroup, checkboxFields: FieldInterface[]): Object {
+    return checkboxFields.reduce((acc: {[key: string]: string[] | undefined}, checkboxField: FieldInterface) => {
+      if (checkboxField.options) {
+        const modValue = this.transformCheckboxesArray(dynamicForm, checkboxField.id, checkboxField.options);
+        acc[checkboxField.id] = modValue;
+      }
+
+      return acc;
+    }, {});
+  }
+
+  transformCheckboxesArray(dynamicForm: FormGroup, checkboxFieldId: string, options: OptionInterface[]): string[] {
+    const checkboxValues = dynamicForm.value[checkboxFieldId];
+    const selectedOptions = checkboxValues
+      .map((isChecked: boolean, index: number) => (isChecked ? options[index].label : null))
+      .filter((label: string | null) => label !== null);
+
+    return selectedOptions;
+  }
+
+  removeEmptyCheckboxFields(formValuesModified: any): Object {
+    return Object.fromEntries(
+      Object.entries(formValuesModified).filter(([key, value]) => {
+        return Array.isArray(value) ? value.length > 0 : value;
+      })
+    );
   }
 }

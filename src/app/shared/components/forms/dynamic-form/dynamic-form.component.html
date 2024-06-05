@@ -6,7 +6,7 @@
   <div class="text-center">
     <button mat-button type="submit" [disabled]="dynamicForm.invalid">Submit</button>
   </div>
-  } @if (formConfig.resetBtn) {
+  } @if (formConfig.resetButton) {
   <div class="text-center">
     <button mat-button [disabled]="dynamicForm.pristine && dynamicForm.valid" (click)="resetForm()">Reset</button>
   </div>

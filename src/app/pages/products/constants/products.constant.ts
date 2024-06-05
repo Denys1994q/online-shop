@@ -1,4 +1,4 @@
-import {ProductInterface} from '../../shared/models/product.interface';
+import {ProductInterface} from '../../../shared/models/product.interface';
 
 export const products: ProductInterface[] = [
   {

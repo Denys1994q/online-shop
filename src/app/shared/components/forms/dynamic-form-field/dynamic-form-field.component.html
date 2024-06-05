@@ -5,11 +5,11 @@
       <div *ngSwitchCase="FormFieldTypeEnum.Text" class="w-full">
         <app-text-input [form]="form"></app-text-input>
         @if (formItem.validators) {
-        <app-dynamic-error
-          [validators]="formItem.validators"
-          [form]="form"
-          [formItem]="formItem.id"
-        ></app-dynamic-error>
+          <app-dynamic-error
+            [validators]="formItem.validators"
+            [form]="form"
+            [formItem]="formItem.id">
+          </app-dynamic-error>
         }
       </div>
       <!-- select -->
@@ -28,37 +28,52 @@
           }}</mat-option>
         </mat-select>
         @if (formItem.validators) {
-        <app-dynamic-error
-          [validators]="formItem.validators"
-          [form]="form"
-          [formItem]="formItem.id"
-        ></app-dynamic-error>
+          <app-dynamic-error
+            [validators]="formItem.validators"
+            [form]="form"
+            [formItem]="formItem.id">
+          </app-dynamic-error>
         }
       </mat-form-field>
       <!-- checkbox -->
-      <div *ngSwitchCase="FormFieldTypeEnum.Checkbox" class="mb-8" formGroupName="{{ formItem.id }}">
+      <div *ngSwitchCase="FormFieldTypeEnum.Checkbox" class="mb-8" [formGroupName]="formItem.id">
         <h4>{{ formItem.label }}:</h4>
         <ul class="max-h-80 overflow-auto">
-          <li *ngFor="let item of formItem.options">
+          <li *ngFor="let item of formItem.options; let i = index">
             <p>
-              <mat-checkbox color="primary" formControlName="{{ item.value }}">{{ item.label }}</mat-checkbox>
+              <mat-checkbox color="primary" [formControlName]="i">
+                @if(formItem.iconLabel) { 
+                  <div class="flex">
+                    @for (item of [].constructor(item.value); track $index) {
+                      <li>
+                        <mat-icon>{{ formItem.iconLabel }}</mat-icon>
+                      </li>
+                    } 
+                  </div>
+                } @else {
+                  {{ item.label }}
+                }
+              </mat-checkbox>
             </p>
           </li>
         </ul>
         @if (formItem.validators) {
-        <app-dynamic-error
-          [validators]="formItem.validators"
-          [form]="form"
-          [formItem]="formItem.id"
-        ></app-dynamic-error>
+          <app-dynamic-error
+            [validators]="formItem.validators"
+            [form]="form"
+            [formItem]="formItem.id">
+          </app-dynamic-error>
         }
       </div>
       <!-- slider -->
       <div *ngSwitchCase="FormFieldTypeEnum.Slider" class="mb-8">
         <app-slider [formItem]="formItem"></app-slider>
         @if (formItem.validators) {
-        <app-dynamic-error [validators]="formItem.validators" [form]="form" [formItem]="formItem.id">
-        </app-dynamic-error>
+          <app-dynamic-error 
+            [validators]="formItem.validators" 
+            [form]="form" 
+            [formItem]="formItem.id">
+          </app-dynamic-error>
         }
       </div>
     </ng-container>
