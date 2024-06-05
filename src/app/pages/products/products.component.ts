@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductsService} from '../../services/products.service';
 import {ProductInterface} from '../../shared/models/product.interface';
-import {productsFilters} from './products-filters.constant';
+import {productsFilters} from './constants/products-filters.constant';
 
 @Component({
   selector: 'app-products',

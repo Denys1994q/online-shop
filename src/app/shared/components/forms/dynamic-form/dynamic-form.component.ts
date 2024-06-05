@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DynamicFormInterface} from './dynamic-form.model';
-import {Subject, debounceTime, takeUntil} from 'rxjs';
+import {Subject, debounceTime, distinctUntilChanged, takeUntil} from 'rxjs';
 import {DynamicFormService} from '../../../../services/dynamic-form.service';
+import {FormFieldTypeEnum} from './dynamic-form.model';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -22,23 +23,29 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dynamicFormService.setupFormFields(this.dynamicForm, this.formConfig);
+
     if (this.formConfig.mode === 'onChange') {
-      this.dynamicForm.valueChanges.pipe(takeUntil(this.unsubscribe$), debounceTime(500)).subscribe(() => {
-        this.emitFormValuesOnChange();
-      });
+      this.dynamicForm.valueChanges
+        .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.unsubscribe$))
+        .subscribe(() => {
+          this.handleFormValueChanges();
+        });
     }
   }
 
-  private emitFormValuesOnChange(): void {
-    this.formChange.emit(this.dynamicForm.value);
-  }
-
-  private emitFormValuesOnSubmit(): void {
-    this.formSubmit.emit(this.dynamicForm.value);
+  handleFormValueChanges() {
+    const checkboxFields = this.formConfig.fields.filter((field) => field.type === FormFieldTypeEnum.Checkbox);
+    const modifiedValues = this.dynamicFormService.getModifiedCheckboxValues(this.dynamicForm, checkboxFields);
+    const formValuesModified = {
+      ...this.dynamicForm.value,
+      ...modifiedValues
+    };
+    const onlyFieldsWithValue = this.dynamicFormService.removeEmptyCheckboxFields(formValuesModified);
+    this.formChange.emit(onlyFieldsWithValue);
   }
 
   onSubmit(): void {
-    this.emitFormValuesOnSubmit();
+    this.handleFormValueChanges();
   }
 
   resetForm(): void {

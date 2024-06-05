@@ -1,15 +1,15 @@
-import {categoriesOptions, brandsOptions} from './products-filters.model';
+import {categoriesOptions, brandsOptions} from './products-filters.helper';
 import {
   DynamicFormInterface,
   FormFieldTypeEnum
-} from '../../shared/components/forms/dynamic-form/dynamic-form.model';
+} from '../../../shared/components/forms/dynamic-form/dynamic-form.model';
 
 export const MIN_PRODUCTS_PRICE = 1;
 export const MAX_PRODUCTS_PRICE = 1000;
 
 export const productsFilters: DynamicFormInterface = {
   mode: 'onChange',
-  resetBtn: true,
+  resetButton: true,
   fields: [
     {
       id: 'categories',
@@ -27,12 +27,13 @@ export const productsFilters: DynamicFormInterface = {
       id: 'rating',
       label: 'Rating',
       type: FormFieldTypeEnum.Checkbox,
+      iconLabel: 'star',
       options: [
-        {label: '⭐⭐⭐⭐⭐', value: 5},
-        {label: '⭐⭐⭐⭐', value: 4},
-        {label: '⭐⭐⭐', value: 3},
-        {label: '⭐⭐', value: 2},
-        {label: '⭐', value: 1}
+        {label: '5', value: 5},
+        {label: '4', value: 4},
+        {label: '3', value: 3},
+        {label: '2', value: 2},
+        {label: '1', value: 1}
       ]
     },
     {

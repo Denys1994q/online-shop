@@ -22,6 +22,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import {SliderComponent} from './components/inputs/slider/slider.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -43,14 +44,15 @@ import { HttpClientModule } from '@angular/common/http';
     MatCheckboxModule,
     MatSliderModule,
     ScaleDirective,
-    PermissionCheckDirective,
     CountryNumberFormatPipe,
     InternationalDatePipe,
+    PermissionCheckDirective,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
-  exports: [ProductCardComponent, DynamicFormComponent, MatCheckboxModule, MatSliderModule]
+  exports: [ProductCardComponent, DynamicFormComponent, MatCheckboxModule, MatSliderModule, MatProgressSpinnerModule]
 })
 export class SharedModule {}

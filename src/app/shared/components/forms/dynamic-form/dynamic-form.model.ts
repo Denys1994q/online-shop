@@ -27,10 +27,11 @@ export interface FieldInterface {
   validators?: ValidationInterface[];
   min?: number;
   max?: number;
+  iconLabel?: string;
 }
 
 export interface DynamicFormInterface {
   mode: 'onChange' | 'onSubmit';
-  resetBtn?: boolean;
+  resetButton?: boolean;
   fields: FieldInterface[];
 }

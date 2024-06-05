@@ -1,17 +1,13 @@
 <ng-container [formGroup]="form">
   <h4>{{ formItem.label }}:</h4>
-  <mat-slider min="{{ formItem.min }}" max="{{ formItem.max }}" formGroupName="{{ formItem.id }}" discrete>
+  <mat-slider min="{{ formItem.min }}" max="{{ formItem.max }}" [formGroupName]="formItem.id" discrete>
     @if (formItem.options) {
-    <input
-      value="{{ formItem.options[0].value }}"
-      matSliderStartThumb
-      formControlName="{{ formItem.options[0].label }}"
-    />
+    <input value="{{ formItem.options[0].value }}" matSliderStartThumb [formControlName]="formItem.options[0].label" />
     <input
       matInput
       value="{{ formItem.options[1].value }}"
       matSliderEndThumb
-      formControlName="{{ formItem.options[1].label }}"
+      [formControlName]="formItem.options[1].label"
     />
     }
   </mat-slider>
