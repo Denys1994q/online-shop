@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProductInterface} from '../../models/product.interface';
+import {RoutingConstants} from '../../constants/rouring.constant';
 
 @Component({
   selector: 'app-product-card',
@@ -9,6 +10,7 @@ import {ProductInterface} from '../../models/product.interface';
 export class ProductCardComponent implements OnInit {
   @Input({required: true}) product!: ProductInterface;
   priceWithDiscount!: number;
+  routingConstants = RoutingConstants;
 
   ngOnInit() {
     this.priceWithDiscount = this.product.discount

@@ -22,6 +22,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import {SliderComponent} from './components/inputs/slider/slider.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {RouterModule} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,8 +51,19 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    RouterModule,
+    HttpClientModule
   ],
-  exports: [ProductCardComponent, DynamicFormComponent, MatCheckboxModule, MatSliderModule, MatProgressSpinnerModule]
+  exports: [
+    ProductCardComponent,
+    DynamicFormComponent,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    WishlistButtonComponent,
+    PrimaryButtonComponent
+  ]
 })
 export class SharedModule {}

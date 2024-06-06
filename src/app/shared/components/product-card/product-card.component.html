@@ -1,6 +1,6 @@
 <mat-card>
   <div class="w-96 h-64">
-    <img mat-card-image class="w-96 h-64 object-contain p-5" src="{{ product.image }}" alt="Product image" />
+    <img mat-card-image class="w-96 h-64 object-contain p-5" src="{{ product.images[0] }}" alt="Product image" />
   </div>
   <mat-card-header>
     <div>
@@ -47,7 +47,9 @@
       }
     </div>
     <div class="mt-auto flex flex-col gap-2">
-      <app-primary-button [text]="'Product Detail'"></app-primary-button>
+      <a [routerLink]="'/' + routingConstants.PRODUCTS + '/' + product.id">
+        <app-primary-button [text]="'Product Detail'"></app-primary-button
+      ></a>
       <app-wishlist-button></app-wishlist-button>
     </div>
   </mat-card-actions>
