@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {
   DynamicFormInterface,
   FieldInterface,
@@ -14,8 +14,21 @@ export class DynamicFormService {
   constructor(private fb: FormBuilder) {}
 
   private FormControlResolver: any = {
-    [FormFieldTypeEnum.Checkbox]: (formItem: FieldInterface) => {
-      return formItem.options && this.fb.array(formItem.options.map(() => new FormControl(false)));
+    [FormFieldTypeEnum.Checkbox]: (formItem: any) => {
+      return (
+        formItem.options &&
+        this.fb.array(
+          formItem.options.map((option: any) => {
+            const isChecked = formItem.defaultValues?.includes(option.value) || false;
+            const control = new FormControl(isChecked);
+            // control.markAsTouched();
+            // або саму форму тачд зробити або форм еррей
+            //  Calls to the reset() operation in particular will use this new defaultValue.
+            // можна просто встановити тут дефолт
+            return control;
+          })
+        )
+      );
     },
     [FormFieldTypeEnum.Slider]: (formItem: FieldInterface) => {
       const formGroup = this.fb.group({});
@@ -42,6 +55,7 @@ export class DynamicFormService {
       const formControl = this.resolveFormControl(formItem);
       dynamicForm.addControl(formItem.id, formControl);
     });
+    console.log(dynamicForm);
   }
 
   resetForm(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
