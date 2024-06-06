@@ -1,6 +1,6 @@
 <div class="flex py-6">
   <div class="w-2/5">
-    <img class="w-full h-2/4 object-contain" src="{{ product.images[0] }}" alt="product-image" />
+    <img class="w-full h-80 object-contain" src="{{ product.images[0] }}" alt="product-image" />
   </div>
   <div class="w-3/5">
     <h1 class="text-3xl">{{ product.title }}</h1>
@@ -47,7 +47,7 @@
         <div>
           <span class="text-4xl font-medium block">{{ priceWithDiscount | countryNumberFormat : 'US' }} $</span>
           @if (product.discount) {
-            <span class="text-lg line-through block">{{ product.price | countryNumberFormat : 'US' }} $</span>
+          <span class="text-lg line-through block">{{ product.price | countryNumberFormat : 'US' }} $</span>
           }
         </div>
         <app-primary-button [text]="'Add to cart'"></app-primary-button>
