@@ -1,3 +1,5 @@
-<div *ngIf="loader.isLoading$ | async">
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
+@if (loader.isLoading$ | async) {
+  <div>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+}
