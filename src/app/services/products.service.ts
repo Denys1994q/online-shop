@@ -4,7 +4,7 @@ import {delay} from 'rxjs/operators';
 import {products} from '../pages/products/constants/products.constant';
 import {ProductInterface} from '../shared/models/product.interface';
 import {HttpClient} from '@angular/common/http';
-import {baseUrl, getOneProductUrl} from '../api/urls';
+import {getOneProductUrl} from '../api/urls';
 
 @Injectable({
   providedIn: 'root'
