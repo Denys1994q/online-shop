@@ -25,15 +25,15 @@
           </li>
           <li class="flex">
             <p class="w-2/5">State:</p>
-            <p>{{ product.state }}</p>
+            <p>{{ product.state | titlecase }}</p>
           </li>
           <li class="flex">
             <p class="w-2/5">Seller:</p>
-            <p>{{ product.seller }}</p>
+            <p>{{ product.seller | titlecase }}</p>
           </li>
           <li class="flex">
             <p class="w-2/5">Brand:</p>
-            <p>{{ product.brand }}</p>
+            <p>{{ product.brand | titlecase }}</p>
           </li>
         </ul>
       </mat-card-content>
@@ -47,7 +47,7 @@
       }
     </div>
     <div class="mt-auto flex flex-col gap-2">
-      <a [routerLink]="'/' + routingConstants.PRODUCTS + '/' + product.id">
+      <a [routerLink]="'/' + routingConstants.PRODUCTS + '/' + product._id">
         <app-primary-button [text]="'Product Detail'"></app-primary-button
       ></a>
       <app-wishlist-button></app-wishlist-button>

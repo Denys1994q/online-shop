@@ -3,6 +3,7 @@ import {ActivatedRouteSnapshot, ResolveFn, Router} from '@angular/router';
 import {Observable, catchError, of} from 'rxjs';
 import {ProductsService} from '../../../services/products.service';
 import {ProductInterface} from '../../../shared/models/product.interface';
+import {RoutingConstants} from '../../../shared/constants/rouring.constant';
 
 export const ProductDetailsResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot
@@ -14,7 +15,7 @@ export const ProductDetailsResolver: ResolveFn<any> = (
     productId &&
     productsService.getProductById(productId).pipe(
       catchError(() => {
-        router.navigate(['/products']);
+        router.navigate([`/${RoutingConstants.PRODUCTS}`]);
         return of({} as ProductInterface);
       })
     )

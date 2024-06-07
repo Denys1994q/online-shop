@@ -10,22 +10,17 @@ import {productsFilters} from './constants/products-filters.constant';
 })
 export class ProductsComponent implements OnInit {
   products!: ProductInterface[];
-  loading: boolean = false;
   productsFilters = productsFilters;
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.subscribeToProducts();
+    this.getProducts();
   }
 
-  subscribeToProducts(): void {
-    this.loading = true;
-    this.productsService.getProducts().subscribe({
-      next: (products: ProductInterface[]) => {
-        this.products = products;
-        this.loading = false;
-      }
+  getProducts(): void {
+    this.productsService.getProducts().subscribe((products: ProductInterface[]) => {
+      this.products = products;
     });
   }
 
