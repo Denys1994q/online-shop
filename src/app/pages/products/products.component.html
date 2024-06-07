@@ -7,17 +7,13 @@
   </div>
   <div class="w-2/3">
     <div>
-      @if (loading) {
-      <div class="flex justify-center"><mat-spinner diameter="30"></mat-spinner></div>
-      } @else {
       <ul>
-        @for (product of products; track product.id) {
+        @for (product of products; track product._id) {
         <li class="mb-6"><app-product-card [product]="product"></app-product-card></li>
         } @empty {
         <h2>Nothing found</h2>
         }
       </ul>
-      }
     </div>
   </div>
 </div>

@@ -21,8 +21,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import {SliderComponent} from './components/inputs/slider/slider.component';
-import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {RouterModule} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
+import {SpinnerComponent} from './components/spinner/spinner.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     TextInputComponent,
     DynamicFormFieldComponent,
     DynamicErrorComponent,
-    SliderComponent
+    SliderComponent,
+    SpinnerComponent
   ],
   imports: [
     MatButtonModule,
@@ -50,9 +54,22 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatProgressSpinnerModule,
+    RouterModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressBarModule
   ],
-  exports: [ProductCardComponent, DynamicFormComponent, MatCheckboxModule, MatSliderModule, MatProgressSpinnerModule]
+  exports: [
+    ProductCardComponent,
+    DynamicFormComponent,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    WishlistButtonComponent,
+    PrimaryButtonComponent,
+    SpinnerComponent,
+    MatProgressBarModule
+  ]
 })
 export class SharedModule {}

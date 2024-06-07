@@ -10,7 +10,6 @@ import {productsFilters} from './constants/products-filters.constant';
 })
 export class ProductsComponent implements OnInit {
   products!: ProductInterface[];
-  loading: boolean = false;
   productsFilters = productsFilters;
 
   constructor(private productsService: ProductsService) {}
@@ -20,16 +19,8 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.loading = true;
-    this.productsService.getProducts().subscribe({
-      next: (products: ProductInterface[]) => {
-        this.products = products;
-        this.loading = false;
-      },
-      error: (error) => {
-        this.loading = false;
-        console.log(error);
-      }
+    this.productsService.getProducts().subscribe((products: ProductInterface[]) => {
+      this.products = products;
     });
   }
 

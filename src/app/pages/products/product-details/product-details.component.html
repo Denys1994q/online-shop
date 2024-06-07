@@ -1,0 +1,60 @@
+<div class="flex py-6">
+  <div class="w-2/5">
+    <img class="w-full h-80 object-contain" src="{{ product.images[0] }}" alt="product-image" />
+  </div>
+  <div class="w-3/5">
+    <h1 class="text-3xl">{{ product.title }}</h1>
+    <ul class="my-5 flex">
+      @for (item of [].constructor(product.rating); track $index) {
+      <li>
+        <mat-icon>star</mat-icon>
+      </li>
+      }
+    </ul>
+    <p class="text-lg">{{ product.description }}</p>
+    <div class="flex gap-24">
+      <ul class="mt-9 text-base">
+        <li class="flex mb-1">
+          <p class="w-24 text-gray-400">Country:</p>
+          <p>USA</p>
+        </li>
+        <li class="flex mb-1">
+          <p class="w-24 text-gray-400">Seller:</p>
+          <p>Rozetka</p>
+        </li>
+        <li class="flex mb-1">
+          <p class="w-24 text-gray-400">State:</p>
+          <p>New</p>
+        </li>
+      </ul>
+      <ul class="mt-9 text-base">
+        <li class="flex mb-1">
+          <p class="w-24 text-gray-400">Sim:</p>
+          <p>2</p>
+        </li>
+        <li class="flex mb-1">
+          <p class="w-24 text-gray-400">Material:</p>
+          <p>Aluminum</p>
+        </li>
+        <li class="flex mb-1">
+          <p class="w-24 text-gray-400">Processor:</p>
+          <p>A15 Bionic</p>
+        </li>
+      </ul>
+    </div>
+    <div class="w-3/4 mt-9 px-4 py-3 border-gray-100 rounded-lg border">
+      <div class="flex justify-between items-center">
+        <div>
+          <span class="text-4xl font-medium block">{{ priceWithDiscount | countryNumberFormat : 'US' }} $</span>
+          @if (product.discount) {
+          <span class="text-lg line-through block">{{ product.price | countryNumberFormat : 'US' }} $</span>
+          }
+        </div>
+        <app-primary-button [text]="'Add to cart'"></app-primary-button>
+      </div>
+    </div>
+    <div class="w-48 mt-9">
+      <app-wishlist-button></app-wishlist-button>
+    </div>
+  </div>
+</div>

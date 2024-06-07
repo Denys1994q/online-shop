@@ -47,7 +47,9 @@
       }
     </div>
     <div class="mt-auto flex flex-col gap-2">
-      <app-primary-button [text]="'Product Detail'"></app-primary-button>
+      <a [routerLink]="'/' + routingConstants.PRODUCTS + '/' + product._id">
+        <app-primary-button [text]="'Product Detail'"></app-primary-button
+      ></a>
       <app-wishlist-button></app-wishlist-button>
     </div>
   </mat-card-actions>
