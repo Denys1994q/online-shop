@@ -21,6 +21,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import {SliderComponent} from './components/inputs/slider/slider.component';
+import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
@@ -49,6 +50,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    HttpClientModule,
     MatProgressSpinnerModule
   ],
   exports: [ProductCardComponent, DynamicFormComponent, MatCheckboxModule, MatSliderModule, MatProgressSpinnerModule]

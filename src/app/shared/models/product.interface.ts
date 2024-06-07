@@ -2,12 +2,12 @@ export interface ProductInterface {
   id: string;
   title: string;
   description: string;
-  image: string;
+  images: string[];
   country: string;
   seller: string;
   state: string;
   price: number;
   discount?: number;
   rating: number;
-  brand: number;
+  brand: string;
 }

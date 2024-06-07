@@ -27,3 +27,15 @@ export enum BrandsEnum {
   Formula = 'Formula'
 }
 
+export enum StateEnum {
+  New = 'New',
+  Pre_Owned = 'Pre owned'
+}
+
+export enum SellerEnum {
+  Rozetka = 'Rozetka',
+  Allo = 'Allo',
+  Foxtrot = 'Foxtrot',
+  Moto = 'Moyo',
+  Prom = 'Prom'
+}

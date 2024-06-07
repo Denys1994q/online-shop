@@ -1,6 +1,6 @@
 <mat-card>
   <div class="w-96 h-64">
-    <img mat-card-image class="w-96 h-64 object-contain p-5" src="{{ product.image }}" alt="Product image" />
+    <img mat-card-image class="w-96 h-64 object-contain p-5" src="{{ product.images[0] }}" alt="Product image" />
   </div>
   <mat-card-header>
     <div>
@@ -25,15 +25,15 @@
           </li>
           <li class="flex">
             <p class="w-2/5">State:</p>
-            <p>{{ product.state }}</p>
+            <p>{{ product.state | titlecase }}</p>
           </li>
           <li class="flex">
             <p class="w-2/5">Seller:</p>
-            <p>{{ product.seller }}</p>
+            <p>{{ product.seller | titlecase }}</p>
           </li>
           <li class="flex">
             <p class="w-2/5">Brand:</p>
-            <p>{{ product.brand }}</p>
+            <p>{{ product.brand | titlecase }}</p>
           </li>
         </ul>
       </mat-card-content>
