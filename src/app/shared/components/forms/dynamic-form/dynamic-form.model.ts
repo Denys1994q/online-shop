@@ -13,19 +13,13 @@ export interface OptionInterface {
   value: number | string;
 }
 
-export interface ValidationInterface {
-  error: ValidatorFn;
-  type: string;
-  message: string;
-}
-
 export interface FieldInterface {
   id: string;
   label: string;
   type: FormFieldTypeEnum;
   options?: OptionInterface[];
   value?: string | OptionInterface[] | number[];
-  validators?: ValidationInterface[];
+  validators?: ValidatorFn[];
   min?: number;
   max?: number;
   iconLabel?: string;

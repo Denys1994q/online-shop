@@ -32,12 +32,12 @@ export class DynamicFormService {
         formItem.options.forEach((option: OptionInterface) => {
           formGroup.addControl(option.label, this.fb.control(option.value));
         });
-        formGroup.controls.max.defaultValue = formItem.max
-        formGroup.controls.min.defaultValue = formItem.min
+      formGroup.controls.max.defaultValue = formItem.max;
+      formGroup.controls.min.defaultValue = formItem.min;
       return formGroup;
     },
     default: (formItem: FieldInterface) => {
-      const validationErrors: any = formItem.validators && formItem.validators.map((validator) => validator.error);
+      const validationErrors: any = formItem.validators && formItem.validators.map((validator) => validator);
       return this.fb.control(
         formItem.value || '',
         formItem.type === FormFieldTypeEnum.ConfirmPassword

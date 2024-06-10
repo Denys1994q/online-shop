@@ -1,5 +1,8 @@
 import {Validators} from '@angular/forms';
-import {DynamicFormInterface,FormFieldTypeEnum} from '../../../shared/components/forms/dynamic-form/dynamic-form.model';
+import {
+  DynamicFormInterface,
+  FormFieldTypeEnum
+} from '../../../shared/components/forms/dynamic-form/dynamic-form.model';
 
 export const signInFormConfig: DynamicFormInterface = {
   mode: 'onSubmit',
@@ -8,18 +11,13 @@ export const signInFormConfig: DynamicFormInterface = {
       id: 'email',
       label: 'Email',
       type: FormFieldTypeEnum.Text,
-      validators: [
-        {error: Validators.required, type: 'required', message: 'Email is required'},
-        {error: Validators.email, type: 'email', message: 'Invalid email'}
-      ]
+      validators: [Validators.required, Validators.email]
     },
     {
       id: 'password',
       label: 'Password',
       type: FormFieldTypeEnum.Text,
-      validators: [
-        {error: Validators.required, type: 'required', message: 'Password is required'},
-      ]
+      validators: [Validators.required]
     }
   ]
 };
