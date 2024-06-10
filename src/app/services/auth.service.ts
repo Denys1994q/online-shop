@@ -63,8 +63,7 @@ export class AuthService {
     const options = {headers: headers};
 
     return this.http.get<any>(this.logoutUrl, options).pipe(
-      tap((d) => {
-        console.log(d)
+      tap(() => {
         localStorage.removeItem('authToken');
         this.userDataSubject.next(null);
         this.router.navigate([`/${RoutingConstants.SIGN_IN}`]);
