@@ -7,11 +7,11 @@ import {LayoutComponent} from './layout/layout.component';
 const routes: Routes = [
   {
     path: '',
+    canActivate: [canActivate],
     component: LayoutComponent,
     children: [
       {
         path: RoutingConstants.PRODUCTS,
-        canActivate: [canActivate],
         loadChildren: () => import('./pages/products/products.module').then((m) => m.ProductsModule)
       }
     ]

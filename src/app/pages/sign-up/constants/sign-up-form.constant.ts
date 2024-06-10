@@ -39,7 +39,6 @@ export const signUpFormConfig: DynamicFormInterface = {
       label: 'Phone number',
       type: FormFieldTypeEnum.Text
     },
-    //  можливо якщо використати його пайп, то не треба буде тут писати type
     {
       id: 'password',
       label: 'Password',

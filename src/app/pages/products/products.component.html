@@ -11,12 +11,7 @@
         @for (product of products; track product._id) {
         <li class="mb-6"><app-product-card [product]="product"></app-product-card></li>
         } @empty {
-          @if(loader.isLoading$ | async) {
-            
-          } @else {
-            <h2>Nothing found</h2>
-          }
-       
+          <h2>Nothing found</h2>
         }
       </ul>
     </div>

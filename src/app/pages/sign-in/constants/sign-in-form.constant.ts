@@ -1,8 +1,5 @@
 import {Validators} from '@angular/forms';
-import {
-  DynamicFormInterface,
-  FormFieldTypeEnum
-} from '../../../shared/components/forms/dynamic-form/dynamic-form.model';
+import {DynamicFormInterface,FormFieldTypeEnum} from '../../../shared/components/forms/dynamic-form/dynamic-form.model';
 
 export const signInFormConfig: DynamicFormInterface = {
   mode: 'onSubmit',
