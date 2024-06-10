@@ -31,9 +31,8 @@ export class DynamicFormService {
       formItem.options &&
         formItem.options.forEach((option: OptionInterface) => {
           formGroup.addControl(option.label, this.fb.control(option.value));
+          formGroup.controls[option.label].defaultValue = formItem[option.label as keyof FieldInterface];
         });
-      formGroup.controls.max.defaultValue = formItem.max;
-      formGroup.controls.min.defaultValue = formItem.min;
       return formGroup;
     },
     default: (formItem: FieldInterface) => {
