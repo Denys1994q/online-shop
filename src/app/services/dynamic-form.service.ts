@@ -101,7 +101,7 @@ export class DynamicFormService {
       if (this.form) {
         const passwordControl = this.form.controls['password'].value;
         if (passwordControl !== control.value) {
-          return {passwordsNotMatch: 'Passwords don`t match'};
+          return {passwordsNotMatch: true};
         }
       }
 
