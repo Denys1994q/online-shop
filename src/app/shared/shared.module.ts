@@ -26,6 +26,7 @@ import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {ControlErrorHandlerPipe} from './pipes/control-error-handler.pipe';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatProgressSpinnerModule,
     RouterModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    ControlErrorHandlerPipe
   ],
   exports: [
     ProductCardComponent,

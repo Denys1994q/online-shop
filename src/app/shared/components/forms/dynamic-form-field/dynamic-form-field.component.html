@@ -5,19 +5,13 @@
       <div *ngSwitchCase="FormFieldTypeEnum.Text" class="form__field w-full mb-4">
         <app-text-input [form]="form" [formItem]="formItem"></app-text-input>
         @if (formItem.validators) {
-        <app-dynamic-error [validators]="formItem.validators" [form]="form" [formItem]="formItem.id">
-        </app-dynamic-error>
+        <app-dynamic-error [formItem]="form.get(formItem.id)"></app-dynamic-error>
         }
       </div>
       <!-- confirm password -->
       <div *ngSwitchCase="FormFieldTypeEnum.ConfirmPassword" class="form__field w-full mb-4">
         <app-text-input [form]="form" [formItem]="formItem"></app-text-input>
-        @if (form.get(formItem.id)!.dirty && form.get(formItem.id)!.hasError('passwordsNotMatch')) {
-          <mat-error class="text-left pl-4 text-xs">{{form.get(formItem.id)!.getError('passwordsNotMatch') }}</mat-error>
-        }
-        @if (form.get(formItem.id)!.dirty && form.get(formItem.id)!.hasError('required')) {
-          <mat-error class="text-left pl-4 text-xs">Field is required</mat-error>
-        }
+        <app-dynamic-error [formItem]="form.get(formItem.id)"></app-dynamic-error>
       </div>
       <!-- select -->
       <mat-form-field *ngSwitchCase="FormFieldTypeEnum.Select" class="form__field w-full">
@@ -35,8 +29,7 @@
           }}</mat-option>
         </mat-select>
         @if (formItem.validators) {
-        <app-dynamic-error [validators]="formItem.validators" [form]="form" [formItem]="formItem.id">
-        </app-dynamic-error>
+        <app-dynamic-error [formItem]="form.get(formItem.id)"></app-dynamic-error>
         }
       </mat-form-field>
       <!-- checkbox -->
@@ -62,16 +55,14 @@
           </li>
         </ul>
         @if (formItem.validators) {
-        <app-dynamic-error [validators]="formItem.validators" [form]="form" [formItem]="formItem.id">
-        </app-dynamic-error>
+        <app-dynamic-error [formItem]="form.get(formItem.id)"></app-dynamic-error>
         }
       </div>
       <!-- slider -->
       <div *ngSwitchCase="FormFieldTypeEnum.Slider" class="form__field mb-8">
         <app-slider [formItem]="formItem"></app-slider>
         @if (formItem.validators) {
-        <app-dynamic-error [validators]="formItem.validators" [form]="form" [formItem]="formItem.id">
-        </app-dynamic-error>
+        <app-dynamic-error [formItem]="form.get(formItem.id)"></app-dynamic-error>
         }
       </div>
     </ng-container>
