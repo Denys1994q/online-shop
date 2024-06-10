@@ -16,12 +16,8 @@ export class SignInComponent {
 
   onFormSubmit(values: any): void {
     this.authService.signIn(values).subscribe({
-      next: () => {
-        this.dynamicFormService.resetForm();
-      },
-      error: (error) => {
-        this.errorApi = error.error.message;
-      }
+      next: () => this.dynamicFormService.resetForm(),
+      error: (error) => (this.errorApi = error.error.message)
     });
   }
 }

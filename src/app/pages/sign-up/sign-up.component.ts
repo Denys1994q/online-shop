@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {signUpFormConfig} from './constants/sign-up-form.constant';
-import { AuthService } from '../../services/auth.service';
-import { DynamicFormService } from '../../services/dynamic-form.service';
+import {AuthService} from '../../services/auth.service';
+import {DynamicFormService} from '../../services/dynamic-form.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,12 +16,8 @@ export class SignUpComponent {
 
   onFormSubmit(values: any): void {
     this.authService.signUp(values).subscribe({
-      next: () => {
-        this.dynamicFormService.resetForm();
-      },
-      error: (error) => {
-        this.errorApi = error.error.message;
-      }
-    })
+      next: () => this.dynamicFormService.resetForm(),
+      error: (error) => (this.errorApi = error.error.message)
+    });
   }
 }
