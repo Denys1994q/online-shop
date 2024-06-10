@@ -1,5 +1,13 @@
 import {Injectable} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import {
   DynamicFormInterface,
   FieldInterface,
@@ -12,22 +20,30 @@ import {
 })
 export class DynamicFormService {
   constructor(private fb: FormBuilder) {}
+  form!: FormGroup;
 
   private FormControlResolver: any = {
     [FormFieldTypeEnum.Checkbox]: (formItem: FieldInterface) => {
       return formItem.options && this.fb.array(formItem.options.map(() => new FormControl(false)));
     },
     [FormFieldTypeEnum.Slider]: (formItem: FieldInterface) => {
-      const formGroup = this.fb.group({});
+      const formGroup: any = this.fb.group({});
       formItem.options &&
         formItem.options.forEach((option: OptionInterface) => {
           formGroup.addControl(option.label, this.fb.control(option.value));
         });
+        formGroup.controls.max.defaultValue = formItem.max
+        formGroup.controls.min.defaultValue = formItem.min
       return formGroup;
     },
     default: (formItem: FieldInterface) => {
-      const validationErrors = formItem.validators && formItem.validators.map((validator) => validator.error);
-      return this.fb.control(formItem.value || '', validationErrors);
+      const validationErrors: any = formItem.validators && formItem.validators.map((validator) => validator.error);
+      return this.fb.control(
+        formItem.value || '',
+        formItem.type === FormFieldTypeEnum.ConfirmPassword
+          ? [Validators.required, this.confirmPasswordValidator()]
+          : validationErrors
+      );
     }
   };
 
@@ -42,25 +58,11 @@ export class DynamicFormService {
       const formControl = this.resolveFormControl(formItem);
       dynamicForm.addControl(formItem.id, formControl);
     });
+    this.form = dynamicForm;
   }
 
-  resetForm(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
-    dynamicForm.reset();
-    this.resetValuesForSliderType(dynamicForm, formConfig);
-  }
-
-  resetValuesForSliderType(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
-    formConfig.fields.forEach((formItem: FieldInterface) => {
-      if (formItem.type === FormFieldTypeEnum.Slider) {
-        const id = formItem.id;
-        dynamicForm.patchValue({
-          [id]: {
-            min: formItem.min,
-            max: formItem.max
-          }
-        });
-      }
-    });
+  resetForm(): void {
+    this.form.reset();
   }
 
   getModifiedCheckboxValues(dynamicForm: FormGroup, checkboxFields: FieldInterface[]): Object {
@@ -90,4 +92,20 @@ export class DynamicFormService {
       })
     );
   }
+
+  confirmPasswordValidator = (): ValidatorFn => {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.value === null || control.value === '') {
+        return null;
+      }
+      if (this.form) {
+        const passwordControl = this.form.controls['password'].value;
+        if (passwordControl !== control.value) {
+          return {passwordsNotMatch: 'Passwords don`t match'};
+        }
+      }
+
+      return null;
+    };
+  };
 }

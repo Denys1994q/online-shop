@@ -1,0 +1,18 @@
+<div class="w-2/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+  <div>
+    <img src="../../../assets/logo.svg" class="mx-auto mb-4" alt="logo" />
+  </div>
+  <div class="m-auto py-7 px-2 text-center border-gray-200 border rounded-md">
+    <h2 class="text-green-600">Sign Up</h2>
+    <app-dynamic-form [formConfig]="signUpFormConfig" (formSubmit)="onFormSubmit($event)"></app-dynamic-form>
+    <div class="mt-4">
+      <p class="text-right text-base text-sm">
+        Already have an account?
+        <a [routerLink]="'/sign-in'">
+          <span class="text-green-600">Sign In.</span>
+        </a>
+      </p>
+    </div>
+  </div>
+  @if (errorApi) {<p class="py-4 text-base text-red-500">{{errorApi}}</p> }
+</div>

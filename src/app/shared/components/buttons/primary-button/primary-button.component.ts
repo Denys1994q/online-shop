@@ -9,5 +9,6 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrls: ['./primary-button.component.sass']
 })
 export class PrimaryButtonComponent {
-  @Input() text!: string;
+  @Input({required: true}) text!: string;
+  @Input() disabled: boolean = false;
 }

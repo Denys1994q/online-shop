@@ -23,7 +23,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dynamicFormService.setupFormFields(this.dynamicForm, this.formConfig);
-
     if (this.formConfig.mode === 'onChange') {
       this.dynamicForm.valueChanges
         .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.unsubscribe$))
@@ -31,6 +30,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
           this.handleFormValueChanges();
         });
     }
+    this.validateConfirmPasswordOnChange();
   }
 
   handleFormValueChanges() {
@@ -44,12 +44,25 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     this.formChange.emit(onlyFieldsWithValue);
   }
 
+  validateConfirmPasswordOnChange(): void {
+    const passwordField = this.dynamicForm.get('password');
+    if (!passwordField) return;
+    passwordField.valueChanges
+      .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        const confirmPasswordField = this.dynamicForm.get('confirmPassword');
+        if (confirmPasswordField) {
+          confirmPasswordField.updateValueAndValidity();
+        }
+      });
+  }
+
   onSubmit(): void {
-    this.handleFormValueChanges();
+    this.formSubmit.emit(this.dynamicForm.value);
   }
 
   resetForm(): void {
-    this.dynamicFormService.resetForm(this.dynamicForm, this.formConfig);
+    this.dynamicFormService.resetForm();
   }
 
   ngOnDestroy() {

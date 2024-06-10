@@ -1,4 +1,4 @@
-<div class="mb-12">
+<div class="mb-12 mt-8">
   <h1>Products Page</h1>
 </div>
 <div class="flex justify-between">
@@ -11,7 +11,12 @@
         @for (product of products; track product._id) {
         <li class="mb-6"><app-product-card [product]="product"></app-product-card></li>
         } @empty {
-        <h2>Nothing found</h2>
+          @if(loader.isLoading$ | async) {
+            
+          } @else {
+            <h2>Nothing found</h2>
+          }
+       
         }
       </ul>
     </div>

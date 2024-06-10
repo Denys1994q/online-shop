@@ -1,6 +1,7 @@
-@for (validationRule of validators; track $index) { @if (form.get(formItem)!.dirty &&
-form.get(formItem)!.hasError(validationRule.type)) {
-<mat-error>
-  {{ validationRule.message }}
-</mat-error>
-} }
+@for (validationRule of validators; track $index) { 
+  @if (form.get(formItem)!.dirty && form.get(formItem)!.hasError(validationRule.type)) {
+    <mat-error class="text-left pl-4 text-xs">
+      {{ validationRule.message }}
+    </mat-error>
+  } 
+}

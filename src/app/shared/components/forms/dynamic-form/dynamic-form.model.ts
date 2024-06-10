@@ -4,7 +4,8 @@ export enum FormFieldTypeEnum {
   Text = 'text',
   Select = 'select',
   Checkbox = 'checkbox',
-  Slider = 'slider'
+  Slider = 'slider',
+  ConfirmPassword = 'confirm password'
 }
 
 export interface OptionInterface {

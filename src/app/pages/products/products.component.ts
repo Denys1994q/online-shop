@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductsService} from '../../services/products.service';
 import {ProductInterface} from '../../shared/models/product.interface';
 import {productsFilters} from './constants/products-filters.constant';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +13,7 @@ export class ProductsComponent implements OnInit {
   products!: ProductInterface[];
   productsFilters = productsFilters;
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService, public loader: LoaderService) {}
 
   ngOnInit(): void {
     this.getProducts();
