@@ -13,7 +13,7 @@ const routes: Routes = [
       {
         path: RoutingConstants.PRODUCTS,
         loadChildren: () => import('./pages/products/products.module').then((m) => m.ProductsModule)
-      }
+      },
     ]
   },
   {

@@ -19,7 +19,12 @@ export const canActivate: CanActivateFn = (_, state) => {
     );
   } else {
     return authService.getUser().pipe(
-      map(() => true),
+      map(() => {
+        if (state.url === '/') {
+          router.navigate([`/${RoutingConstants.PRODUCTS}`]);
+        }
+        return true 
+      }),
       catchError(() => {
         router.navigate([`/${RoutingConstants.SIGN_IN}`]);
         return of(false);

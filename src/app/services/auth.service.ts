@@ -1,30 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {tap, map, catchError} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {baseUrl} from '../../enviroments/enviroment';
 import {RoutingConstants} from '../shared/constants/rouring.constant';
-
-export interface UserData {
-  name?: string;
-  surname?: string;
-  middleName?: string;
-  sex?: string;
-  email?: string;
-  phone?: string;
-  displayName?: string;
-  dateOfBirth?: any;
-  wishlist?: any[];
-  _id?: string;
-}
-
-interface UserResponse extends UserData {
-  _id: string;
-  token: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import {UserInterface} from '../shared/directives/permissionCheck.directive';
+import {UserTokens} from '../shared/models/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -35,18 +17,18 @@ export class AuthService {
   private getUserUrl = `${baseUrl}/auth/me`;
   private logoutUrl = `${baseUrl}/auth/logout`;
 
-  public userDataSubject = new BehaviorSubject<UserData | null>(null);
+  public userDataSubject = new BehaviorSubject<UserInterface | null>(null);
   public userData$ = this.userDataSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signIn(credentials: any): Observable<any> {
-    return this.http.post<any>(this.signInUrl, credentials).pipe(
-      tap((response) => {
+  signIn(credentials: {email: string; password: string}): Observable<UserInterface> {
+    return this.http.post<UserTokens>(this.signInUrl, credentials).pipe(
+      switchMap((response) => {
         localStorage.setItem('authToken', response.accessToken);
-        this.userDataSubject.next(response);
-        this.router.navigate([`/${RoutingConstants.PRODUCTS}`]);
-      })
+        return this.getUser();
+      }),
+      tap(() => this.router.navigate([`/${RoutingConstants.PRODUCTS}`]))
     );
   }
 
@@ -54,25 +36,23 @@ export class AuthService {
     return !!this.userDataSubject.value;
   }
 
-  signUp(userData: any): Observable<any> {
-    return this.http.post<any>(this.signUpUrl, userData).pipe(
-      tap((response) => {
+  signUp(userData: UserInterface): Observable<UserInterface> {
+    return this.http.post<UserTokens>(this.signUpUrl, userData).pipe(
+      switchMap((response) => {
         localStorage.setItem('authToken', response.accessToken);
-        this.userDataSubject.next(response);
-        this.router.navigate([`/${RoutingConstants.PRODUCTS}`]);
-      })
+        return this.getUser();
+      }),
+      tap(() => this.router.navigate([`/${RoutingConstants.PRODUCTS}`]))
     );
   }
 
-  getUser(): Observable<any> {
+  getUser(): Observable<UserInterface> {
     const token = localStorage.getItem('authToken');
     const headers = {Authorization: `Bearer ${token}`};
     const options = {headers: headers};
-    return this.http.get<any>(this.getUserUrl, options).pipe(
-      tap((response) => {
-        this.userDataSubject.next(response);
-      })
-    );
+    return this.http
+      .get<UserInterface>(this.getUserUrl, options)
+      .pipe(tap((response) => this.userDataSubject.next(response)));
   }
 
   logout(): Observable<any> {
@@ -81,7 +61,7 @@ export class AuthService {
     const headers = {Authorization: `Bearer ${token}`};
     const options = {headers: headers};
     return this.http.get<any>(this.logoutUrl, options).pipe(
-      tap(() => {
+      tap((d) => {
         localStorage.removeItem('authToken');
         this.userDataSubject.next(null);
         this.router.navigate([`/${RoutingConstants.SIGN_IN}`]);
