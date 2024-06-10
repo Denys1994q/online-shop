@@ -50,6 +50,7 @@ export class AuthService {
     const token = localStorage.getItem('authToken');
     const headers = {Authorization: `Bearer ${token}`};
     const options = {headers: headers};
+
     return this.http
       .get<UserInterface>(this.getUserUrl, options)
       .pipe(tap((response) => this.userDataSubject.next(response)));
@@ -60,8 +61,9 @@ export class AuthService {
     if (!token) return new Observable();
     const headers = {Authorization: `Bearer ${token}`};
     const options = {headers: headers};
+
     return this.http.get<any>(this.logoutUrl, options).pipe(
-      tap((d) => {
+      tap(() => {
         localStorage.removeItem('authToken');
         this.userDataSubject.next(null);
         this.router.navigate([`/${RoutingConstants.SIGN_IN}`]);
