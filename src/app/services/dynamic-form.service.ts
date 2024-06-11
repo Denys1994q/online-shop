@@ -1,13 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators
-} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {
   DynamicFormInterface,
   FieldInterface,
@@ -37,12 +29,7 @@ export class DynamicFormService {
     },
     default: (formItem: FieldInterface) => {
       const validationErrors: any = formItem.validators && formItem.validators.map((validator) => validator);
-      return this.fb.control(
-        formItem.value || '',
-        formItem.type === FormFieldTypeEnum.ConfirmPassword
-          ? [Validators.required, this.confirmPasswordValidator()]
-          : validationErrors
-      );
+      return this.fb.control(formItem.value || '', validationErrors);
     }
   };
 
@@ -91,20 +78,4 @@ export class DynamicFormService {
       })
     );
   }
-
-  confirmPasswordValidator = (): ValidatorFn => {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (control.value === null || control.value === '') {
-        return null;
-      }
-      if (this.form) {
-        const passwordControl = this.form.controls['password'].value;
-        if (passwordControl !== control.value) {
-          return {passwordsNotMatch: true};
-        }
-      }
-
-      return null;
-    };
-  };
 }

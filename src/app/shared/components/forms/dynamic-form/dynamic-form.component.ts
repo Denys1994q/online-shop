@@ -47,14 +47,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   validateConfirmPasswordOnChange(): void {
     const passwordField = this.dynamicForm.get('password');
     if (!passwordField) return;
-    passwordField.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        const confirmPasswordField = this.dynamicForm.get('confirmPassword');
-        if (confirmPasswordField) {
-          confirmPasswordField.updateValueAndValidity();
-        }
-      });
+    passwordField.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+      const confirmPasswordField = this.dynamicForm.get('confirmPassword');
+      if (confirmPasswordField) {
+        confirmPasswordField.updateValueAndValidity();
+      }
+    });
   }
 
   onSubmit(): void {

@@ -3,12 +3,7 @@ import {
   DynamicFormInterface,
   FormFieldTypeEnum
 } from '../../../shared/components/forms/dynamic-form/dynamic-form.model';
-import {
-  twoDigitsValidator,
-  twoLowercaseLettersValidator,
-  twoSymbolsValidator,
-  twoUppercaseLettersValidator
-} from '../validation/password.validation';
+import {confirmPasswordValidator, passwordValidator} from '../validation/password.validation';
 
 export const signUpFormConfig: DynamicFormInterface = {
   mode: 'onSubmit',
@@ -40,18 +35,13 @@ export const signUpFormConfig: DynamicFormInterface = {
       id: 'password',
       label: 'Password',
       type: FormFieldTypeEnum.Text,
-      validators: [
-        Validators.required,
-        twoUppercaseLettersValidator(),
-        twoSymbolsValidator(),
-        twoLowercaseLettersValidator(),
-        twoDigitsValidator()
-      ]
+      validators: [Validators.required, passwordValidator()]
     },
     {
       id: 'confirmPassword',
       label: 'Confirm password',
-      type: FormFieldTypeEnum.ConfirmPassword
+      type: FormFieldTypeEnum.ConfirmPassword,
+      validators: [Validators.required, confirmPasswordValidator()]
     }
   ]
 };
