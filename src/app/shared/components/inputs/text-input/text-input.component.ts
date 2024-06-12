@@ -9,10 +9,4 @@ import {FieldInterface} from '../../forms/dynamic-form/dynamic-form.model';
 export class TextInputComponent {
   @Input() form!: FormGroup;
   @Input() formItem!: FieldInterface;
-  hidePassword = true;
-
-  togglePassword(event: MouseEvent) {
-    this.hidePassword = !this.hidePassword;
-    event.stopPropagation();
-  }
 }
