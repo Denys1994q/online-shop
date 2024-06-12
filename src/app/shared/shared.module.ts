@@ -27,6 +27,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {ControlErrorHandlerPipe} from './pipes/control-error-handler.pipe';
+import {TogglePasswordDirective} from './directives/toggle-password.directive';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {ControlErrorHandlerPipe} from './pipes/control-error-handler.pipe';
     RouterModule,
     HttpClientModule,
     MatProgressBarModule,
-    ControlErrorHandlerPipe
+    ControlErrorHandlerPipe,
+    TogglePasswordDirective
   ],
   exports: [
     ProductCardComponent,
