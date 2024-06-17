@@ -1,10 +1,12 @@
 <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
-  <ng-container *ngFor="let formItem of formConfig.fields">
-    <dynamic-form-field [formItem]="formItem"></dynamic-form-field>
-  </ng-container>
+  <div class="form__fields">
+    <ng-container *ngFor="let formItem of formConfig.fields">
+      <dynamic-form-field [formItem]="formItem"></dynamic-form-field>
+    </ng-container>
+  </div>
   @if(formConfig.mode === 'onSubmit') {
-  <div class="text-center">
-    <button mat-button type="submit" [disabled]="dynamicForm.invalid">Submit</button>
+  <div class="text-center submit-button">
+    <app-primary-button [text]="'Submit'" [disabled]="dynamicForm.invalid" type="submit"></app-primary-button>
   </div>
   } @if (formConfig.resetButton) {
   <div class="text-center">

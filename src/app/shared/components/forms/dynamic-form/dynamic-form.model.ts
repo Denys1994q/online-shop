@@ -4,18 +4,13 @@ export enum FormFieldTypeEnum {
   Text = 'text',
   Select = 'select',
   Checkbox = 'checkbox',
-  Slider = 'slider'
+  Slider = 'slider',
+  ConfirmPassword = 'confirm password'
 }
 
 export interface OptionInterface {
   label: string;
   value: number | string;
-}
-
-export interface ValidationInterface {
-  error: ValidatorFn;
-  type: string;
-  message: string;
 }
 
 export interface FieldInterface {
@@ -24,7 +19,7 @@ export interface FieldInterface {
   type: FormFieldTypeEnum;
   options?: OptionInterface[];
   value?: string | OptionInterface[] | number[];
-  validators?: ValidationInterface[];
+  validators?: ValidatorFn[];
   min?: number;
   max?: number;
   iconLabel?: string;

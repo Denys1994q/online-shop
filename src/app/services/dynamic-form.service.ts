@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {
   DynamicFormInterface,
   FieldInterface,
@@ -12,21 +12,23 @@ import {
 })
 export class DynamicFormService {
   constructor(private fb: FormBuilder) {}
+  form!: FormGroup;
 
   private FormControlResolver: any = {
     [FormFieldTypeEnum.Checkbox]: (formItem: FieldInterface) => {
       return formItem.options && this.fb.array(formItem.options.map(() => new FormControl(false)));
     },
     [FormFieldTypeEnum.Slider]: (formItem: FieldInterface) => {
-      const formGroup = this.fb.group({});
+      const formGroup: any = this.fb.group({});
       formItem.options &&
         formItem.options.forEach((option: OptionInterface) => {
           formGroup.addControl(option.label, this.fb.control(option.value));
+          formGroup.controls[option.label].defaultValue = formItem[option.label as keyof FieldInterface];
         });
       return formGroup;
     },
     default: (formItem: FieldInterface) => {
-      const validationErrors = formItem.validators && formItem.validators.map((validator) => validator.error);
+      const validationErrors: any = formItem.validators && formItem.validators.map((validator) => validator);
       return this.fb.control(formItem.value || '', validationErrors);
     }
   };
@@ -42,25 +44,11 @@ export class DynamicFormService {
       const formControl = this.resolveFormControl(formItem);
       dynamicForm.addControl(formItem.id, formControl);
     });
+    this.form = dynamicForm;
   }
 
-  resetForm(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
-    dynamicForm.reset();
-    this.resetValuesForSliderType(dynamicForm, formConfig);
-  }
-
-  resetValuesForSliderType(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
-    formConfig.fields.forEach((formItem: FieldInterface) => {
-      if (formItem.type === FormFieldTypeEnum.Slider) {
-        const id = formItem.id;
-        dynamicForm.patchValue({
-          [id]: {
-            min: formItem.min,
-            max: formItem.max
-          }
-        });
-      }
-    });
+  resetForm(): void {
+    this.form.reset();
   }
 
   getModifiedCheckboxValues(dynamicForm: FormGroup, checkboxFields: FieldInterface[]): Object {

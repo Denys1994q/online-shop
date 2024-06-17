@@ -1,6 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {ValidationInterface} from '../dynamic-form/dynamic-form.model';
 
 @Component({
   selector: 'app-dynamic-error',
@@ -8,7 +6,5 @@ import {ValidationInterface} from '../dynamic-form/dynamic-form.model';
   styleUrls: []
 })
 export class DynamicErrorComponent {
-  @Input({required: true}) validators: ValidationInterface[] = [];
-  @Input({required: true}) form!: FormGroup;
-  @Input({required: true}) formItem!: string;
+  @Input({required: true}) formItem!: any;
 }

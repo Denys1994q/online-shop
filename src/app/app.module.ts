@@ -7,10 +7,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {LoaderInterceptor} from './interceptors/loader.interceptor';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {FooterComponent} from './layout/footer/footer.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HeaderComponent, SharedModule],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HeaderComponent, FooterComponent, SharedModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

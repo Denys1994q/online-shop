@@ -1,6 +1,10 @@
 <div [formGroup]="form">
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label>{{ formItem.label }}</mat-label>
-    <input matInput formControlName="{{ formItem.id }}" />
+    @if (formItem.id === 'password' || formItem.id === 'confirmPassword') {
+      <input togglePassword placeholder="Password" matInput [formControlName]="formItem.id" type="password" />
+    } @else {
+      <input matInput [formControlName]="formItem.id" />
+    }
   </mat-form-field>
 </div>
