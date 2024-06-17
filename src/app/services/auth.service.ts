@@ -5,7 +5,7 @@ import {switchMap, tap} from 'rxjs/operators';
 import {enviroment} from '../../enviroments/enviroment';
 import {UserInterface} from '../shared/directives/permissionCheck.directive';
 import {UserTokens} from '../shared/models/user.interface';
-import {IS_SHOW_TOAST} from '../interceptors/error.interceptor';
+import {WITH_TOAST} from '../interceptors/error.interceptor';
 import {WITH_AUTH_TOKEN} from '../interceptors/auth-token.interceptor';
 
 @Injectable({
@@ -55,8 +55,8 @@ export class AuthService {
       return this.userDataSubject as Observable<UserInterface>;
     } else {
       const context = new HttpContext();
-      context.set(IS_SHOW_TOAST, false);
-      
+      context.set(WITH_TOAST, false);
+
       return this.http
         .get<UserInterface>(this.getUserUrl, {context})
         .pipe(tap((response) => this.userDataSubject.next(response)));
