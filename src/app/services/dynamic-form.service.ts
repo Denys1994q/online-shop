@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {
   DynamicFormInterface,
   FieldInterface,
@@ -70,23 +70,23 @@ export class DynamicFormService {
     );
   }
 
-  createCheckboxControl(formItem: any): any {
-    return this.fb.array(
-      formItem.options.map((option: any) => {
-        const isChecked = formItem.defaultValues?.includes(option.value.toString()) || false;
-        return new FormControl(isChecked);
-      })
+  createCheckboxControl(formItem: FieldInterface): FormArray | undefined {
+    return (
+      formItem.options &&
+      this.fb.array(
+        formItem.options.map((option: OptionInterface) => {
+          const isChecked = formItem.defaultValues?.includes(option.value.toString()) || false;
+          return new FormControl(isChecked);
+        })
+      )
     );
   }
 
-  createSliderControl(formItem: any): any {
+  createSliderControl(formItem: FieldInterface): FormGroup {
     const formGroup: any = this.fb.group({});
     formItem.options?.forEach((option: OptionInterface, index: number) => {
-      const controlValue = formItem.defaultValues ? +formItem.defaultValues[index] : option.value
-      formGroup.addControl(
-        option.label,
-        this.fb.control(controlValue)
-      );
+      const controlValue = formItem.defaultValues ? +formItem.defaultValues[index] : option.value;
+      formGroup.addControl(option.label, this.fb.control(controlValue));
       formGroup.controls[option.label].defaultValue = formItem[option.label as keyof FieldInterface];
     });
 
