@@ -32,10 +32,18 @@ export class DynamicFormService {
     },
     [FormFieldTypeEnum.Slider]: (formItem: FieldInterface) => {
       const formGroup = this.fb.group({});
+      console.log(formItem.defaultValues)
       formItem.options &&
         formItem.options.forEach((option: OptionInterface) => {
           formGroup.addControl(option.label, this.fb.control(option.value));
         });
+        if (formItem.defaultValues && formItem.defaultValues.hasOwnProperty('min') && formItem.defaultValues.hasOwnProperty('max')) {
+          // Встановлюємо мінімальне і максимальне значення для слайдера
+          formGroup.patchValue({
+            min: formItem.defaultValues.min,
+            max: formItem.defaultValues.max
+          });
+        }
       return formGroup;
     },
     default: (formItem: FieldInterface) => {

@@ -19,6 +19,7 @@ export interface ValidationInterface {
 }
 
 export interface FieldInterface {
+  defaultValues: any;
   id: string;
   label: string;
   type: FormFieldTypeEnum;

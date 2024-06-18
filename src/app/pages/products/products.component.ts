@@ -51,6 +51,7 @@ export class ProductsComponent implements OnInit {
           };
         }
       });
+      console.log(this.productsFilters.fields)
     });
   }
 
