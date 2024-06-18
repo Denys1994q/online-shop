@@ -122,3 +122,21 @@ ul
 
 .mat-mdc-form-field
   width: 100%
+
+.mat-mdc-snack-bar-container 
+  .mdc-snackbar__surface
+    min-width: 200px !important
+  .mdc-button
+    min-width: 0 !important
+    color: #fff
+  .mdc-snackbar__label
+    padding-right: 50px !important
+  .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled)
+    color: #fff !important
+
+.mat-mdc-snack-bar-container 
+  --mdc-snackbar-supporting-text-color: #fff
+  &.toast-error 
+    --mdc-snackbar-container-color:  var(--error)
+  &.toast-success 
+    --mdc-snackbar-container-color: var(--success)

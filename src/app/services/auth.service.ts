@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpContext} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {switchMap, tap} from 'rxjs/operators';
 import {enviroment} from '../../enviroments/enviroment';
 import {UserInterface} from '../shared/directives/permissionCheck.directive';
 import {UserTokens} from '../shared/models/user.interface';
+import {WITH_TOAST} from '../interceptors/error.interceptor';
+import {WITH_AUTH_TOKEN} from '../interceptors/auth-token.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,10 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   signIn(credentials: {email: string; password: string}): Observable<UserInterface> {
-    return this.http.post<UserTokens>(this.signInUrl, credentials).pipe(
+    const context = new HttpContext();
+    context.set(WITH_AUTH_TOKEN, false);
+
+    return this.http.post<UserTokens>(this.signInUrl, credentials, {context}).pipe(
       switchMap((response) => {
         localStorage.setItem('authToken', response.accessToken);
         return this.getUser();
@@ -34,7 +39,10 @@ export class AuthService {
   }
 
   signUp(userData: UserInterface): Observable<UserInterface> {
-    return this.http.post<UserTokens>(this.signUpUrl, userData).pipe(
+    const context = new HttpContext();
+    context.set(WITH_AUTH_TOKEN, false);
+
+    return this.http.post<UserTokens>(this.signUpUrl, userData, {context}).pipe(
       switchMap((response) => {
         localStorage.setItem('authToken', response.accessToken);
         return this.getUser();
@@ -46,12 +54,11 @@ export class AuthService {
     if (this.userDataSubject.getValue()) {
       return this.userDataSubject as Observable<UserInterface>;
     } else {
-      const token = localStorage.getItem('authToken');
-      const headers = {Authorization: `Bearer ${token}`};
-      const options = {headers: headers};
+      const context = new HttpContext();
+      context.set(WITH_TOAST, false);
 
       return this.http
-        .get<UserInterface>(this.getUserUrl, options)
+        .get<UserInterface>(this.getUserUrl, {context})
         .pipe(tap((response) => this.userDataSubject.next(response)));
     }
   }
