@@ -14,6 +14,7 @@ export interface OptionInterface {
 }
 
 export interface FieldInterface {
+  defaultValues?: string[];
   id: string;
   label: string;
   type: FormFieldTypeEnum;
