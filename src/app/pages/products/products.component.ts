@@ -15,7 +15,7 @@ import {Subject, takeUntil} from 'rxjs';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   products!: ProductInterface[];
-  productsFilters: any = productsFilters;
+  productsFilters = productsFilters;
   unsubscribe$ = new Subject<void>();
 
   constructor(
