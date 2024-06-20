@@ -50,7 +50,7 @@
           <span class="text-lg line-through block">{{ product.price | countryNumberFormat : 'US' }} $</span>
           }
         </div>
-        <app-primary-button [text]="'Add to cart'"></app-primary-button>
+        <app-primary-button [text]="'Add to cart'" (buttonClick)="handleAddToCartClick()"></app-primary-button>
       </div>
     </div>
     <div class="w-48 mt-9">

@@ -1,0 +1,35 @@
+<div class="flex items-center justify-between border-b border-gray-100 pb-6">
+  <div class="flex w-2/4">
+    <div class="w-3/4">
+      <div class="w-24 h-24">
+        <img mat-card-image class="w-24 h-24 object-contain" src="{{ product.images[0] }}" alt="Product image" />
+      </div>
+      <button mat-button (click)="removeFromCart()" class="mt-4"><mat-icon>close</mat-icon>Remove</button>
+    </div>
+    <div class="w-3/4">
+      <p class="font-medium truncate overflow-hidden">{{ product.title }}</p>
+      <ul class="flex">
+        @for (item of [].constructor(product.rating); track $index) {
+        <li>
+          <mat-icon>star</mat-icon>
+        </li>
+        }
+      </ul>
+      <p class="text-green-600 font-medium text-lg">{{ product.price | countryNumberFormat : 'US' }} $</p>
+    </div>
+  </div>
+  <div class="w-14 mr-5">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Pcs</mat-label>
+      <input
+        matInput
+        type="number"
+        class="text-center"
+        [(ngModel)]="amountValue"
+        (input)="onAmountInputChange($event)"
+        name="numberValue"
+        [min]="1"
+      />
+    </mat-form-field>
+  </div>
+</div>

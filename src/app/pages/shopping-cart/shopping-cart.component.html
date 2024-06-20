@@ -1,0 +1,20 @@
+<div class="flex">
+  <div class="w-3/4">form</div>
+  <div class="w-2/4 border rounded-lg border-gray-100 p-4">
+    <p class="font-semibold text-xl">Order Summary</p>
+    <p class="text-gray-400">Price can change depending on shipping method and taxes of your state.</p>
+    <div class="mt-8 max-h-96 overflow-auto">
+      <ul>
+        @for (product of shoppingCartService.products; track product._id) {
+        <li class="mb-6"><app-mini-product-card [product]="product"></app-mini-product-card></li>
+        } @empty {
+        <h2>Cart is empty</h2>
+        }
+      </ul>
+    </div>
+    <div class="mt-8 flex justify-between items-center">
+      <span class="text-xs font-semibold">Total order</span>
+      <span class="font-semibold text-2xl text-green-600">{{ shoppingCartService.totalPrice | countryNumberFormat : 'US' }} $</span>
+    </div>
+  </div>
+</div>

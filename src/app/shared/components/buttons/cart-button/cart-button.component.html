@@ -1,3 +1,5 @@
-<button mat-icon-button class="hover:bg-green-100">
-  <mat-icon>add_shopping_cart</mat-icon>
-</button>
+<a [routerLink]="routingConstants.SHOPPING_CART">
+  <button mat-icon-button class="hover:bg-green-100" [matBadge]="shoppingCartService.totalProductsNumber > 0 ? shoppingCartService.totalProductsNumber : null" matBadgeColor="primary">
+    <mat-icon>add_shopping_cart</mat-icon>
+  </button>
+</a>
