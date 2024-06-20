@@ -10,6 +10,7 @@ import {ShoppingCartService} from '../../../pages/shopping-cart/services/shoppin
 export class MiniProductCardComponent implements OnInit {
   @Input({required: true}) product!: CartProductInterface;
   amountValue: number = 0;
+  amountValueError: boolean = false;
 
   constructor(private shoppingCartService: ShoppingCartService) {}
 
@@ -18,8 +19,13 @@ export class MiniProductCardComponent implements OnInit {
   }
 
   onAmountInputChange(event: Event): void {
-    const newValue = (event.target as HTMLInputElement).value;
-    this.shoppingCartService.updateProductAmount(this.product._id, +newValue);
+    const newValue = +(event.target as HTMLInputElement).value;
+    if (newValue < 1) {
+      this.amountValueError = true;
+      return;
+    }
+    this.amountValueError = false;
+    this.shoppingCartService.updateProductAmount(this.product._id, newValue);
   }
 
   removeFromCart(): void {
