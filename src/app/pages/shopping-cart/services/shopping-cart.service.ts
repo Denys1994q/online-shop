@@ -7,27 +7,27 @@ import {CartProductInterface} from '../models/cart-product.interface';
 export class ShoppingCartService {
   products: CartProductInterface[] = [];
   totalPrice: number = 0;
-  totalProductsNumber: number = 0
+  totalProductsNumber: number = 0;
 
   constructor() {
     this.loadCartProducts();
   }
 
-  addToCart(item: any): void {
-    const existingProduct = this.products.find((p) => p._id === item._id);
+  addToCart(product: any): void {
+    const existingProduct = this.products.find((p) => p._id === product._id);
     if (existingProduct) {
       existingProduct.amount++;
     } else {
-      item.amount = 1;
-      this.products.push(item);
+      product.amount = 1;
+      this.products.push(product);
     }
     this.saveCartProducts();
     this.calculateTotals();
   }
 
-  getCartProducts(): any {
+  getCartProducts(): void {
     const cartProducts = localStorage.getItem('cart');
-    this.products = cartProducts ? JSON.parse(cartProducts) : []
+    this.products = cartProducts ? JSON.parse(cartProducts) : [];
   }
 
   saveCartProducts(): void {
@@ -54,9 +54,9 @@ export class ShoppingCartService {
   removeFromCart(productId: string): void {
     const index = this.products.findIndex((p) => p._id === productId);
     if (index !== -1) {
-      this.products.splice(index, 1); 
-      this.saveCartProducts(); 
-      this.calculateTotals(); 
+      this.products.splice(index, 1);
+      this.saveCartProducts();
+      this.calculateTotals();
     }
   }
 
