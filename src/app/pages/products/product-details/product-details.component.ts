@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProductInterface} from '../../../shared/models/product.interface';
 import {Subject, takeUntil} from 'rxjs';
+import {ShoppingCartService} from '../../shopping-cart/services/shopping-cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +14,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   priceWithDiscount!: number;
   unsubscribe$ = new Subject<void>();
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private shoppingCartService: ShoppingCartService) {}
 
   ngOnInit() {
     window.scrollTo({top: 0, behavior: 'smooth'});
@@ -31,6 +32,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.priceWithDiscount = this.product.discount
       ? this.product.price - (this.product.price * this.product.discount) / 100
       : this.product.price;
+  }
+
+  handleAddToCartClick(): void {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    this.shoppingCartService.addToCart(this.product)
   }
 
   ngOnDestroy() {

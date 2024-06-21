@@ -19,7 +19,11 @@ const routes: Routes = [
       {
         path: RoutingConstants.PRODUCTS,
         loadChildren: () => import('./pages/products/products.module').then((m) => m.ProductsModule)
-      }
+      },
+      {
+        path: RoutingConstants.SHOPPING_CART,
+        loadChildren: () => import('./pages/shopping-cart/shopping-cart.module').then((m) => m.ShoppingCartModule)
+      },
     ]
   },
   {

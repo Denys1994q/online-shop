@@ -28,10 +28,13 @@ import {SpinnerComponent} from './components/spinner/spinner.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {ControlErrorHandlerPipe} from './pipes/control-error-handler.pipe';
 import {TogglePasswordDirective} from './directives/toggle-password.directive';
+import {MiniProductCardComponent} from './components/mini-product-card/mini-product-card.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     ProductCardComponent,
+    MiniProductCardComponent,
     DynamicFormComponent,
     TextInputComponent,
     DynamicFormFieldComponent,
@@ -61,7 +64,8 @@ import {TogglePasswordDirective} from './directives/toggle-password.directive';
     HttpClientModule,
     MatProgressBarModule,
     ControlErrorHandlerPipe,
-    TogglePasswordDirective
+    TogglePasswordDirective,
+    FormsModule
   ],
   exports: [
     ProductCardComponent,
@@ -73,7 +77,8 @@ import {TogglePasswordDirective} from './directives/toggle-password.directive';
     WishlistButtonComponent,
     PrimaryButtonComponent,
     SpinnerComponent,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MiniProductCardComponent
   ]
 })
 export class SharedModule {}
