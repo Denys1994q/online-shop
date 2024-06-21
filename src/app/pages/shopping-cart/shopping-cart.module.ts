@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../../shared/shared.module';
 import {RouterModule, Routes} from '@angular/router';
 import {ShoppingCartComponent} from './shopping-cart.component';
-import { CountryNumberFormatPipe } from "../../shared/pipes/countryNumberFormat.pipe";
+import {CountryNumberFormatPipe} from '../../shared/pipes/countryNumberFormat.pipe';
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [ShoppingCartComponent],
-    imports: [RouterModule.forChild(routes), CommonModule, SharedModule, CountryNumberFormatPipe]
+  declarations: [ShoppingCartComponent],
+  imports: [RouterModule.forChild(routes), CommonModule, SharedModule, CountryNumberFormatPipe]
 })
 export class ShoppingCartModule {}
