@@ -35,7 +35,7 @@ export class ShoppingCartService {
       currentProducts.unshift(product);
     }
     this.productsSubject.next([...currentProducts]);
-    this.updateCart(currentProducts);
+    this.saveCartProducts(currentProducts);
   }
 
   removeFromCart(productId: string): void {
@@ -44,7 +44,7 @@ export class ShoppingCartService {
     if (index !== -1) {
       currentProducts.splice(index, 1);
       this.productsSubject.next([...currentProducts]);
-      this.updateCart(currentProducts);
+      this.saveCartProducts(currentProducts);
     }
   }
 
@@ -54,12 +54,8 @@ export class ShoppingCartService {
     if (productToUpdate) {
       productToUpdate.amount = newAmount;
       this.productsSubject.next([...currentProducts]);
-      this.updateCart(currentProducts);
+      this.saveCartProducts(currentProducts);
     }
-  }
-
-  updateCart(products: CartProductInterface[]): void {
-    this.saveCartProducts(products);
   }
 
   getCartProducts(): CartProductInterface[] {
