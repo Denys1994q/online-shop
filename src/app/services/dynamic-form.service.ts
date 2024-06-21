@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {
   DynamicFormInterface,
   FieldInterface,
@@ -15,18 +15,8 @@ export class DynamicFormService {
   form!: FormGroup;
 
   private FormControlResolver: any = {
-    [FormFieldTypeEnum.Checkbox]: (formItem: FieldInterface) => {
-      return formItem.options && this.fb.array(formItem.options.map(() => new FormControl(false)));
-    },
-    [FormFieldTypeEnum.Slider]: (formItem: FieldInterface) => {
-      const formGroup: any = this.fb.group({});
-      formItem.options &&
-        formItem.options.forEach((option: OptionInterface) => {
-          formGroup.addControl(option.label, this.fb.control(option.value));
-          formGroup.controls[option.label].defaultValue = formItem[option.label as keyof FieldInterface];
-        });
-      return formGroup;
-    },
+    [FormFieldTypeEnum.Checkbox]: (formItem: FieldInterface) => this.createCheckboxControl(formItem),
+    [FormFieldTypeEnum.Slider]: (formItem: FieldInterface) => this.createSliderControl(formItem),
     default: (formItem: FieldInterface) => {
       const validationErrors: any = formItem.validators && formItem.validators.map((validator) => validator);
       return this.fb.control(formItem.value || '', validationErrors);
@@ -40,11 +30,12 @@ export class DynamicFormService {
   }
 
   setupFormFields(dynamicForm: FormGroup, formConfig: DynamicFormInterface): void {
+    this.form = dynamicForm;
     formConfig.fields.forEach((formItem: FieldInterface) => {
+      formItem.defaultValues && this.form.markAsDirty();
       const formControl = this.resolveFormControl(formItem);
       dynamicForm.addControl(formItem.id, formControl);
     });
-    this.form = dynamicForm;
   }
 
   resetForm(): void {
@@ -77,5 +68,28 @@ export class DynamicFormService {
         return Array.isArray(value) ? value.length > 0 : value;
       })
     );
+  }
+
+  createCheckboxControl(formItem: FieldInterface): FormArray | undefined {
+    return (
+      formItem.options &&
+      this.fb.array(
+        formItem.options.map((option: OptionInterface) => {
+          const isChecked = formItem.defaultValues?.includes(option.value.toString()) || false;
+          return new FormControl(isChecked);
+        })
+      )
+    );
+  }
+
+  createSliderControl(formItem: FieldInterface): FormGroup {
+    const formGroup: any = this.fb.group({});
+    formItem.options?.forEach((option: OptionInterface, index: number) => {
+      const controlValue = formItem.defaultValues ? +formItem.defaultValues[index] : option.value;
+      formGroup.addControl(option.label, this.fb.control(controlValue));
+      formGroup.controls[option.label].defaultValue = formItem[option.label as keyof FieldInterface];
+    });
+
+    return formGroup;
   }
 }

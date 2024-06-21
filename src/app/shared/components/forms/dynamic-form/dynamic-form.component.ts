@@ -26,9 +26,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     if (this.formConfig.mode === 'onChange') {
       this.dynamicForm.valueChanges
         .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.unsubscribe$))
-        .subscribe(() => {
-          this.handleFormValueChanges();
-        });
+        .subscribe(() => this.handleFormValueChanges());
     }
     this.validateConfirmPasswordOnChange();
   }
