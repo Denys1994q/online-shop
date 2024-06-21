@@ -32,7 +32,7 @@ export class ShoppingCartService {
       existingProduct.amount++;
     } else {
       product.amount = 1;
-      currentProducts.push(product);
+      currentProducts.unshift(product);
     }
     this.productsSubject.next([...currentProducts]);
     this.updateCart(currentProducts);
